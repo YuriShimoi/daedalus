@@ -1,0 +1,11 @@
+{
+  "name": "daedalus",
+  "version": "0.1.0",
+  "private": true,
+  "bin": { "athena": "athena/cli.js" },
+  "description": "Toolbox of adventure-puzzle tools. Tool 1: Athena, the room explorer.",
+  "scripts": {
+    "test": "node --test \"shared/tests/*.test.js\" \"athena/tests/*.test.js\"",
+    "icons": "node shared/icons/build.js"
+  }
+}

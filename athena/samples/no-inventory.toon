@@ -1,0 +1,29 @@
+dae: 1
+player:
+  hp: 20
+  str: 4
+  def: 1
+  inventory: false
+  slots[3]{id,mode}:
+    hand,hold-drop
+    belt,free
+    pack,free
+items[4]{id,slot,str,heal,uses,key}:
+  club,hand,3,,,
+  sword,hand,5,,8,
+  tonic,,,10,1,
+  key1,,,,,gold
+enemies[2]{id,hp,str,def}:
+  imp,7,4,0
+  troll,16,7,2
+rooms[5]{id,flags,weight,enemies,items}:
+  r0,entry,,,club+tonic
+  r1,,1,imp,key1
+  r2,,1,,sword
+  r3,,2,troll,
+  r4,exit,,,
+passages[4]{id,a,b,lock}:
+  p0,r0,r1,
+  p1,r1,r2,
+  p2,r2,r3,key:gold
+  p3,r3,r4,

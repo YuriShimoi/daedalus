@@ -1,0 +1,37 @@
+dae: 1
+player:
+  hp: 30
+  str: 5
+  def: 1
+  slots[2]{id,mode}:
+    hand,free
+    neck,free
+  fx[1]: lucky
+effects[5]{id,hp,str,def,invuln,dur}:
+  lucky,5,,,,3
+  ward,,,,true,perm
+  weak,,-3,,,perm
+  blessed,,,2,,equip
+  fury,,4,-1,,1
+items[5]{id,slot,str,uses,addFx,delFx,target,onHit}:
+  dagger,hand,2,,,,,weak
+  amulet,neck,,,blessed,,,
+  salt,,,1,,ward,all,
+  berserk,,,1,fury,,self,
+  mace,hand,4,3,,,,
+enemies[3]{id,hp,str,def,fx}:
+  wraith,10,6,0,ward
+  brute,18,9,2,
+  shade,6,5,0,ward
+rooms[5]{id,flags,weight,enemies,items}:
+  r0,entry,,,dagger+amulet
+  r1,,1,,salt+berserk
+  r2,,2,wraith+shade,mace
+  r3,,2,brute,
+  r4,exit,,,
+passages[5]{id,a,b,dir}:
+  p0,r0,r1,
+  p1,r1,r2,
+  p2,r2,r3,
+  p3,r3,r4,
+  p4,r1,r3,a>b

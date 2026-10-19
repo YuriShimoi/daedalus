@@ -1,0 +1,37 @@
+dae: 1
+score:
+  mode: weighted
+player:
+  slots[2]{id,mode}:
+    hand,hold-drop
+    body,fixed
+  start[1]: torch
+effects[2]{id,str,invuln,dur}:
+  ward,,true,perm
+  rage,3,,2
+items[6]{id,slot,str,def,uses,heal,key,addFx,delFx,target}:
+  sword,hand,3,,10,,,,,
+  shield,body,,2,,,,,,
+  potion,,,,1,10,,,,
+  holywater,,,,1,,,,ward,one
+  redkey,,,,,,red,,,
+  torch,,,,,,,,,
+enemies[3]{id,hp,str,def,drop,fx}:
+  rat,6,3,0,,
+  ogre,20,8,3,,
+  ghost,8,4,0,,ward
+rooms[4]{id,flags,weight,mark,enemies,items,builders}:
+  r0,entry,0,,,sword+holywater,
+  r1,,1,important,rat+rat,potion,anvil
+  r2,,2,,rat+ghost+ogre:2,shield,
+  r3,exit,0,required,,,
+passages[4]{id,a,b,dir,lock}:
+  p0,r0,r1,,
+  p1,r1,r2,,
+  p2,r2,r0,a>b,
+  p3,r1,r3,,key:red
+recipes[1]{in,out,consume,builder}:
+  shield+torch,redkey,true,anvil
+events[2]{id,room,on,once,if,do}:
+  ev0,r2,enter,true,,spawn:rat@r2:2+lock:p1
+  ev1,r2,leave,true,kill:ogre,unlock:p1+fx+:rage@player

@@ -1,0 +1,8 @@
+node_modules/
+
+# internal notes
+PLAN.md
+IDEAS.md
+FEATURE-LOG.md
+CHANGELOG.md
+*.log

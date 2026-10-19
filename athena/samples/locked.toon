@@ -1,0 +1,15 @@
+dae: 1
+items[2]{id,key}:
+  bluekey,blue
+  redkey,red
+chests[1]{id,items,lock}:
+  c0,redkey,key:blue
+rooms[4]{id,flags,chests,items}:
+  r0,entry,,
+  r1,,c0,
+  r2,,,bluekey
+  r3,exit,,
+passages[3]{id,a,b,lock}:
+  p0,r0,r1,
+  p1,r1,r2,key:red
+  p2,r1,r3,key:red

@@ -1,0 +1,34 @@
+dae: 1
+player:
+  hp: 25
+  str: 6
+  def: 2
+effects[1]{id,def,dur}:
+  stone,3,2
+items[3]{id,heal,uses,key}:
+  bluekey,,,blue
+  herb,8,1,
+  coin,,,
+enemies[2]{id,hp,str,def,drop}:
+  bat,4,3,0,
+  golem,30,7,4,coin
+rooms[6]{id,flags,weight,enemies,items}:
+  r0,entry,,,
+  r1,,1,,herb
+  r2,,1,bat,
+  r3,,2,golem,
+  r4,,1,,
+  r5,exit,,,
+passages[6]{id,a,b,lock}:
+  p0,r0,r1,
+  p1,r1,r2,
+  p2,r2,r3,
+  p3,r1,r4,key:blue
+  p4,r4,r5,
+  p5,r3,r5,kill:golem
+events[5]{id,room,on,once,if,do}:
+  ev0,r1,enter,true,,give:bluekey
+  ev1,r2,enter,true,,spawn:bat@r2:2+fx+:stone@player
+  ev2,r2,leave,false,,lock:p1
+  ev3,r4,enter,true,item:bluekey,take:bluekey+kill:golem+unlock:p1
+  ev4,r3,enter,false,,fx-:stone@player+fx+:stone@r3.1

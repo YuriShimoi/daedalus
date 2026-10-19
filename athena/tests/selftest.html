@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Athena self-test</title>
+</head>
+<body>
+  <!-- Browser check for file:// and http: the core loads from plain scripts and the solver runs in a Blob worker.
+       Headless: chrome --headless=new --virtual-time-budget=15000 --dump-dom file:///.../athena/tests/selftest.html -->
+  <pre id="out">running</pre>
+  <script src="../../shared/core.js"></script>
+  <script src="../../shared/rng.js"></script>
+  <script src="../../shared/toon.js"></script>
+  <script src="../src/core/model.js"></script>
+  <script src="../src/core/validate.js"></script>
+  <script src="../src/core/effects.js"></script>
+  <script src="../src/core/events.js"></script>
+  <script src="../src/core/rules.js"></script>
+  <script src="../src/core/check.js"></script>
+  <script src="../src/core/solver.js"></script>
+  <script src="../src/core/lsystem.js"></script>
+  <script src="../src/core/generator.js"></script>
+  <script>
+    const $out = document.getElementById('out');
+    const lines = [];
+    const origWorker = window.Worker;
+    let usedWorker = false;
+    window.Worker = class extends origWorker {
+      constructor(...args) { super(...args); usedWorker = true; }
+    };
+    try {
+      const model = DAE.Generator.build({ seed: 5, rooms: 20 });
+      lines.push(`generated ${model.rooms.length} rooms, valid ${DAE.Validate.run(model).ok}`);
+      DAE.Solver.start(model, { timeLimitMs: 3000, top: 1 }, {
+        onDone: r => {
+          lines.push(`solver: ${r.label}, ${r.routes.length} route(s), worker ${usedWorker}`);
+          lines.push(r.routes.length ? 'PASS' : 'FAIL');
+          $out.textContent = lines.join('\n');
+        },
+      });
+    }
+    catch(err) {
+      $out.textContent = 'FAIL ' + err.message;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+dae: 1
+player:
+  hp: 20
+  str: 3
+  def: 0
+  slots[1]{id}:
+    hand
+items[7]{id,slot,str,key,keyUses,breakOnDrop}:
+  stick,,,,,
+  stone,,,,,
+  rope,,,,,
+  hook,,,,,
+  spear,hand,4,,,
+  grapple,,,green,inf,true
+  ironkey,,,iron,1,
+chests[2]{id,items,lock}:
+  c0,rope+hook,
+  c1,ironkey,key:green
+enemies[1]{id,hp,str,def}:
+  wolf,9,4,0
+rooms[5]{id,flags,weight,enemies,items,chests,builders}:
+  r0,entry,,,stick+stone,c0,
+  r1,,1,wolf,,,bench
+  r2,,1,,,c1,
+  r3,,,,,,
+  r4,exit,,,,,
+recipes[2]{in,out,consume,builder}:
+  stick+stone,spear,true,
+  rope+hook,grapple,true,bench
+passages[4]{id,a,b,lock}:
+  p0,r0,r1,
+  p1,r1,r2,key:green
+  p2,r1,r3,key:iron
+  p3,r3,r4,

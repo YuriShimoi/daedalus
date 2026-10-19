@@ -1,0 +1,29 @@
+dae: 1
+rules:
+  combatConsumables: true
+player:
+  hp: 40
+  str: 6
+  def: 1
+  slots[1]{id}:
+    hand
+items[3]{id,slot,str,uses,heal}:
+  axe,hand,4,6,
+  potion,,,1,15
+  bigpotion,,,1,30
+enemies[3]{id,hp,str,def,drop}:
+  goblin,8,4,1,potion
+  archer,5,6,0,
+  chief,24,9,3,bigpotion
+rooms[5]{id,flags,weight,enemies,items}:
+  r0,entry,,,axe
+  r1,,1,goblin+goblin+archer:2,
+  r2,,1,archer+archer+goblin:2+goblin:2,potion
+  r3,,3,goblin+chief:2,
+  r4,exit,,,
+passages[5]{id,a,b}:
+  p0,r0,r1
+  p1,r1,r2
+  p2,r1,r3
+  p3,r2,r3
+  p4,r3,r4

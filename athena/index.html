@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Athena · Daedalus</title>
+  <link rel="icon" type="image/svg+xml" href="assets/athena.svg">
+  <link rel="icon" type="image/x-icon" href="assets/athena.ico" sizes="any">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="top">
+    <a class="brand" href="../index.html" title="Daedalus toolbox"><img class="dae" src="../assets/daedalus.svg" alt="Daedalus"><span class="vr"></span><img class="ic" src="assets/athena.svg" alt="">Athena</a>
+    <div id="toolbar"></div>
+    <div class="file"><span id="issues"></span><b id="file-name">untitled.toon</b><span id="file-state"></span></div>
+  </header>
+
+  <main id="canvas">
+    <div id="graph"></div>
+    <div class="canvas-tools" id="canvas-tools"></div>
+    <div class="mode-banner" id="mode-banner" hidden></div>
+    <div class="hint" id="hint">Double-click: new room (on a path: room in the middle) · drag room: move · right-drag room: link / new room · right-click: menu · Del: delete · wheel: zoom · drag: pan</div>
+  </main>
+
+  <aside id="side">
+    <nav class="tabs" id="tabs"></nav>
+    <div class="pane" id="pane"></div>
+  </aside>
+
+  <footer id="dock"></footer>
+
+  <dialog id="gen-dialog"></dialog>
+  <dialog id="script-dialog"></dialog>
+  <input type="file" id="file-input" accept=".toon,.json,.txt" hidden>
+
+  <script src="../shared/core.js"></script>
+  <script src="../shared/rng.js"></script>
+  <script src="../shared/toon.js"></script>
+  <script src="../shared/history.js"></script>
+  <script src="../shared/icons.js"></script>
+  <script src="src/core/model.js"></script>
+  <script src="src/core/validate.js"></script>
+  <script src="src/core/effects.js"></script>
+  <script src="src/core/events.js"></script>
+  <script src="src/core/rules.js"></script>
+  <script src="src/core/check.js"></script>
+  <script src="src/core/solver.js"></script>
+  <script src="src/core/lsystem.js"></script>
+  <script src="src/core/generator.js"></script>
+  <script src="src/core/layout.js"></script>
+  <script src="src/core/svg.js"></script>
+  <script src="src/ui/files.js"></script>
+  <script src="src/ui/graph.js"></script>
+  <script src="src/ui/tables.js"></script>
+  <script src="src/ui/inspector.js"></script>
+  <script src="src/ui/menu.js"></script>
+  <script src="src/ui/solverpanel.js"></script>
+  <script src="src/ui/playback.js"></script>
+  <script src="src/ui/play.js"></script>
+  <script src="src/ui/main.js"></script>
+</body>
+</html>

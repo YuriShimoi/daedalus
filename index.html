@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daedalus</title>
+  <link rel="icon" type="image/svg+xml" href="assets/daedalus.svg">
+  <link rel="icon" type="image/x-icon" href="assets/daedalus.ico" sizes="any">
+  <link rel="stylesheet" href="shared/base.css">
+  <style>
+    body { display: grid; place-items: start center; padding: 56px 16px; }
+    main { width: 100%; max-width: 760px; }
+    header { display: flex; align-items: center; justify-content: center; gap: 24px; margin: 0 0 40px; }
+    header img { width: 140px; height: 140px; }
+    /* Cinzel Decorative 700, latin subset (SIL Open Font License) */
+    @font-face { font-family: "Cinzel Decorative"; font-weight: 700; font-display: swap; src: url(assets/fonts/cinzel-decorative-700.woff2) format("woff2"); }
+    h1 { margin: 0; font: 700 56px/1 "Cinzel Decorative", "Cinzel", Georgia, serif; letter-spacing: .08em; color: var(--text);
+      text-shadow: 3px 3px 0 #1A1A1A; }
+    .tools { display: grid; gap: 10px; }
+    .tool { display: grid; grid-template-columns: 56px 1fr auto; gap: 16px; align-items: center; padding: 16px; border-radius: var(--r-lg);
+      background: var(--raised); color: var(--text); text-decoration: none; }
+    a.tool:hover { background: var(--line); }
+    .tool .tile { width: 56px; height: 56px; border-radius: 12px; background: var(--base); display: grid; place-items: center; font-size: 24px; color: var(--accent); }
+    .tool .tile img { width: 36px; height: 36px; }
+    .tool h2 { margin: 0; font-size: 16px; }
+    .tool p { margin: 2px 0 0; color: var(--text2); }
+    .tool .go { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <header><img src="assets/daedalus.svg" alt=""><h1>Daedalus</h1></header>
+    <div class="tools">
+      <a class="tool" href="athena/index.html">
+        <span class="tile"><img src="athena/assets/athena.svg" alt=""></span>
+        <span><h2>Athena</h2><p>Room explorer: generate, edit, solve and play room graphs.</p></span>
+        <span class="go" data-icon="arrow-right"></span>
+      </a>
+    </div>
+  </main>
+  <script src="shared/icons.js"></script>
+  <script>
+    DAE.Icons.mount();
+    document.querySelectorAll('[data-icon]').forEach($e => { $e.innerHTML = DAE.Icons.html($e.dataset.icon); });
+  </script>
+</body>
+</html>
