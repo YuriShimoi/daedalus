@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1.5 1.5 61 61">
+  <defs><mask id="h" maskUnits="userSpaceOnUse" x="-8" y="-8" width="80" height="80"><rect x="-8" y="-8" width="80" height="80" fill="#fff"/><g fill="none" stroke="#000" stroke-width="12" stroke-linecap="round"><path d="M23 19V60M41 4V45M23 32H41"/></g></mask></defs>
+  <g mask="url(#h)"><rect x="10" y="10" width="44" height="44" rx="11" fill="none" stroke="#50FA7B" stroke-width="4.5" transform="rotate(45 32 32)"/></g>
+  <path d="M23 19V60M41 4V45M23 32H41" fill="none" stroke="#50FA7B" stroke-width="5" stroke-linecap="round"/>
+</svg>
