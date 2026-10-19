@@ -25,6 +25,9 @@
     .tool h2 { margin: 0; font-size: 16px; }
     .tool p { margin: 2px 0 0; color: var(--text2); }
     .tool .go { color: var(--muted); }
+    .tool.wip { opacity: .5; cursor: default; }
+    .tool.wip .tile { font: 700 24px "Cinzel Decorative", Georgia, serif; color: var(--muted); }
+    .tool .tag { padding: 2px 8px; border-radius: 6px; background: var(--base); color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; }
   </style>
 </head>
 <body>
@@ -36,6 +39,26 @@
         <span><h2>Athena</h2><p>Room explorer: generate, edit, solve and play room graphs.</p></span>
         <span class="go" data-icon="arrow-right"></span>
       </a>
+      <div class="tool wip">
+        <span class="tile">H</span>
+        <span><h2>Hermes</h2><p>Dialog treeview: dialog trees with event markers and loops.</p></span>
+        <span class="tag">WIP</span>
+      </div>
+      <div class="tool wip">
+        <span class="tile">N</span>
+        <span><h2>Nemesis</h2><p>Graph builder: compare raw values and turn them into equations.</p></span>
+        <span class="tag">WIP</span>
+      </div>
+      <div class="tool wip">
+        <span class="tile">A</span>
+        <span><h2>Apollo</h2><p>Music and sound effects tool.</p></span>
+        <span class="tag">WIP</span>
+      </div>
+      <div class="tool wip">
+        <span class="tile">H</span>
+        <span><h2>Hestia</h2><p>Free canvas: draw, bring references and run other Daedalus tools in one space.</p></span>
+        <span class="tag">WIP</span>
+      </div>
     </div>
   </main>
   <script src="shared/icons.js"></script>
