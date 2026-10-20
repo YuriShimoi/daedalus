@@ -2,10 +2,14 @@
   "name": "daedalus",
   "version": "0.1.0",
   "private": true,
-  "bin": { "athena": "athena/cli.js" },
-  "description": "Toolbox of adventure-puzzle tools. Tool 1: Athena, the room explorer.",
+  "bin": {
+    "athena": "athena/cli.js",
+    "apollo": "apollo/cli.js"
+  },
+  "description": "Toolbox of adventure-puzzle tools. Athena: room explorer. Apollo: music and sound effects.",
   "scripts": {
-    "test": "node --test \"shared/tests/*.test.js\" \"athena/tests/*.test.js\"",
-    "icons": "node shared/icons/build.js"
+    "test": "node --test \"shared/tests/*.test.js\" \"athena/tests/*.test.js\" \"apollo/tests/*.test.js\"",
+    "icons": "node shared/icons/build.js",
+    "packs": "node apollo/tools/pack.js"
   }
 }

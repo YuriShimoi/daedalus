@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apollo · Daedalus</title>
+  <link rel="icon" type="image/svg+xml" href="assets/apollo.svg">
+  <link rel="icon" type="image/x-icon" href="assets/apollo.ico" sizes="any">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="simple">
+  <!-- start: mode picker -->
+  <section id="start">
+    <div class="start">
+      <header><img src="assets/apollo.svg" alt=""><h1>Apollo</h1></header>
+      <div class="modes">
+        <button class="mode" data-go="music">
+          <h2><i class="mk music"></i>Music maker</h2>
+          <ul><li>Playlist of pattern clips, up to 8 tracks</li><li>Piano roll and drum channel rack</li><li>Chip, guitar, keys, piano and drum instruments</li><li>Export the song or a seamless loop</li></ul>
+        </button>
+        <button class="mode" data-go="sfx">
+          <h2><i class="mk sfx"></i>SFX maker</h2>
+          <ul><li>One sound at a time: generators, random, mutate</li><li>11 wave types, lockable param sliders</li><li>Mixer layers and variant sets</li><li>WAV at 44k to 8k, 16 or 8 bit</li></ul>
+        </button>
+      </div>
+      <div class="startrow">
+        <button id="start-open"></button>
+        <div class="recent" id="recent"></div>
+      </div>
+    </div>
+  </section>
+
+  <header id="top">
+    <a class="brand" href="../index.html" title="Daedalus toolbox"><img class="dae" src="../assets/daedalus.svg" alt="Daedalus"><span class="vr"></span></a>
+    <button class="brand home" id="home" title="Mode picker"><img class="ic" src="assets/apollo.svg" alt="">Apollo</button>
+    <div class="tabs" id="mode-tabs"><button data-mode="music">Music</button><button data-mode="sfx">SFX</button></div>
+    <div class="tabs" id="level-tabs" title="Simple hides the less important controls"><button data-level="simple">Simple</button><button data-level="full">Full</button></div>
+    <div class="group mo">
+      <button class="play" id="btn-play" title="Play / stop (Space)"></button>
+      <button class="tog" id="btn-loop" title="Loop the range on the bar ruler">Loop</button>
+    </div>
+    <div class="group mo"><label for="in-bpm">BPM</label><input type="number" id="in-bpm" min="20" max="300"></div>
+    <div class="group mo adv"><label>Key</label><select id="in-key"></select><select id="in-scale"></select></div>
+    <div class="group mo"><label for="in-bars">Bars</label><input type="number" id="in-bars" min="1" max="128"></div>
+    <span class="sp"></span>
+    <div class="group adv" title="Master peak (red: clipping)"><label>Master</label><input class="knob" type="range" id="in-master" min="0" max="1" step="0.01"><div class="meter"><i id="meter"></i></div></div>
+    <div class="file"><b id="file-name">untitled.toon</b><span id="file-state"></span></div>
+    <div class="group">
+      <button id="btn-undo" title="Undo (Ctrl+Z)"></button><button id="btn-redo" title="Redo (Ctrl+Y)"></button>
+      <button id="btn-new" class="adv" title="New project"></button>
+      <button id="btn-open" title="Open .toon (Ctrl+O)"></button><button id="btn-save" title="Save .toon (Ctrl+S)"></button>
+      <button class="primary" id="btn-wav" title="Export WAV"></button>
+    </div>
+  </header>
+
+  <!-- MUSIC MAKER -->
+  <section class="view" id="music">
+    <div class="panel" id="playlist-panel">
+      <div class="section">Playlist</div>
+      <div class="songgrid" id="playlist"></div>
+    </div>
+    <div class="panel" id="inspector"></div>
+    <div class="panel" id="editor-panel">
+      <div class="edhead" id="edhead"></div>
+      <div id="editor"></div>
+    </div>
+  </section>
+
+  <!-- SFX MAKER -->
+  <section class="view" id="sfx">
+    <div class="panel" id="sfx-left"></div>
+    <div class="panel" id="sfx-main"></div>
+    <div class="panel adv" id="sfx-right"></div>
+  </section>
+
+  <!-- KEYBOARD (both modes) -->
+  <footer id="kbd">
+    <div class="panel ctl" id="kbd-ctl"></div>
+    <div class="panel"><div class="piano" id="piano"></div></div>
+    <div class="panel keyed adv" id="keyed"></div>
+  </footer>
+
+  <input type="file" id="file-input" accept=".toon,.json,.txt" hidden>
+
+  <script src="../shared/core.js"></script>
+  <script src="../shared/rng.js"></script>
+  <script src="../shared/toon.js"></script>
+  <script src="../shared/history.js"></script>
+  <script src="../shared/icons.js"></script>
+  <script src="src/core/theory.js"></script>
+  <script src="src/core/keymap.js"></script>
+  <script src="src/core/instruments.js"></script>
+  <script src="src/core/samples.js"></script>
+  <script src="src/core/synth.js"></script>
+  <script src="src/core/wav.js"></script>
+  <script src="src/core/sfxr.js"></script>
+  <script src="src/core/project.js"></script>
+  <script src="src/core/sequencer.js"></script>
+  <script src="vendor/sounds/fluid-piano.js"></script>
+  <script src="vendor/sounds/fluid-guitar.js"></script>
+  <script src="vendor/sounds/fluid-epiano.js"></script>
+  <script src="vendor/sounds/vcsl-kit.js"></script>
+  <script src="src/ui/audio.js"></script>
+  <script src="src/ui/files.js"></script>
+  <script src="src/ui/app.js"></script>
+  <script src="src/ui/header.js"></script>
+  <script src="src/ui/playlist.js"></script>
+  <script src="src/ui/editor.js"></script>
+  <script src="src/ui/inspector.js"></script>
+  <script src="src/ui/keyboard.js"></script>
+  <script src="src/ui/sfx.js"></script>
+  <script src="src/ui/main.js"></script>
+</body>
+</html>
