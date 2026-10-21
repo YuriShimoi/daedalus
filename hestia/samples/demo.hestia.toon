@@ -1,0 +1,137 @@
+app: hestia
+version: 1
+view:
+  x: -720
+  y: -420
+  zoom: 0.8
+items[10]:
+  - id: 1
+    kind: group
+    x: -660
+    y: -360
+    w: 1500
+    h: 760
+    z: 0
+    locked: false
+    label: Act 1 · the keep
+    color: #8BE9FD
+  - id: 2
+    kind: widget
+    x: -620
+    y: -310
+    w: 520
+    h: 400
+    z: 1
+    locked: false
+    tool: athena
+    asset: a1
+    name: tutorial.toon
+    audio: null
+  - id: 3
+    kind: widget
+    x: -40
+    y: -310
+    w: 420
+    h: 190
+    z: 2
+    locked: false
+    tool: apollo
+    asset: a2
+    name: song.toon
+    audio: null
+  - id: 4
+    kind: note
+    x: -620
+    y: 130
+    w: 320
+    h: 230
+    z: 3
+    locked: false
+    md: "# Keep: act 1\n- [x] map solved (route s0)\n- [ ] boss theme loop\n- [ ] door sound\n\nThe route uses **holy water** on `r2.2`, then crafts the red key.\n\nRight-click a widget: *Open in Athena / Apollo*."
+  - id: 5
+    kind: image
+    x: 460
+    y: -310
+    w: 320
+    h: 200
+    z: 4
+    locked: false
+    asset: a3
+    name: keep-sketch.svg
+  - id: 6
+    kind: text
+    x: -40
+    y: -80
+    w: 160
+    h: 32
+    z: 5
+    locked: false
+    text: "Boss room needs\na theme and a door sfx"
+    size: 24
+    color: #F1FA8C
+  - id: 7
+    kind: shape
+    x: 460
+    y: -40
+    w: 200
+    h: 100
+    z: 6
+    locked: false
+    shape: rect
+    color: #FFB86C
+    fill: tint
+    width: 2
+    text: door sfx
+    size: 20
+  - id: 8
+    kind: shape
+    x: 700
+    y: -40
+    w: 120
+    h: 100
+    z: 7
+    locked: false
+    shape: ellipse
+    color: #50FA7B
+    fill: none
+    width: 2
+    text: theme
+    size: 18
+  - id: 9
+    kind: shape
+    x: 575.2727272727273
+    y: -104
+    w: 15.81818181818187
+    h: 58.00000000000001
+    z: 8
+    locked: false
+    shape: arrow
+    x1: 575.2727272727273
+    y1: -45.99999999999999
+    x2: 591.0909090909091
+    y2: -104
+    from: 7
+    to: 5
+    color: #FFB86C
+    width: 2
+  - id: 10
+    kind: stroke
+    x: -20
+    y: 40
+    w: 300
+    h: 60
+    z: 9
+    locked: false
+    vw: 300
+    vh: 60
+    points[16]: 0,50,40,20,80,45,120,10,160,40,200,15,240,50,300,30
+    color: #BD93F9
+    width: 3
+edges[3]{id,from,to,label,color}:
+  1,4,2,map,""
+  2,4,3,theme,""
+  3,8,3,"",""
+assets[3]{id,name,mime,data,source}:
+  a1,tutorial.toon,text/toon,ZGFlOiAxCnNjb3JlOgogIG1vZGU6IHdlaWdodGVkCnBsYXllcjoKICBzbG90c1syXXtpZCxtb2RlfToKICAgIGhhbmQsaG9sZC1kcm9wCiAgICBib2R5LGZpeGVkCiAgc3RhcnRbMV06IHRvcmNoCmVmZmVjdHNbMl17aWQsc3RyLGludnVsbixkdXJ9OgogIHdhcmQsLHRydWUsCiAgcmFnZSwzLCwyCml0ZW1zWzZde2lkLHNsb3Qsc3RyLGRlZix1c2VzLGhlYWwsa2V5LGRlbEZ4LHRhcmdldH06CiAgc3dvcmQsaGFuZCwzLCwxMCwsLCwKICBzaGllbGQsYm9keSwsMiwsLCwsCiAgcG90aW9uLCwsLDEsMTAsLCwKICBob2x5d2F0ZXIsLCwsMSwsLHdhcmQsb25lCiAgcmVka2V5LCwsLCwscmVkLCwKICB0b3JjaCwsLCwsLCwsCmVuZW1pZXNbM117aWQsaHAsc3RyLGRlZixmeH06CiAgcmF0LDYsMywsCiAgb2dyZSwyMCw4LDMsCiAgZ2hvc3QsOCw0LCx3YXJkCnJvb21zWzRde2lkLGZsYWdzLHdlaWdodCxtYXJrLGVuZW1pZXMsaXRlbXMsYnVpbGRlcnMseCx5fToKICByMCxlbnRyeSwsLCxzd29yZCtob2x5d2F0ZXIsLDEyMCwyNDAKICByMSwsMSxpbXBvcnRhbnQscmF0K3JhdCxwb3Rpb24sYW52aWwsMjQwLDI0MAogIHIyLCwyLCxyYXQrZ2hvc3Qrb2dyZToyLHNoaWVsZCwsMjQwLDM2MAogIHIzLGV4aXQsLHJlcXVpcmVkLCwsLDM2MCwxMjAKcGFzc2FnZXNbNF17aWQsYSxiLGRpcixsb2NrfToKICBwMCxyMCxyMSwsCiAgcDEscjEscjIsLAogIHAyLHIyLHIwLGE+YiwKICBwMyxyMSxyMywsa2V5OnJlZApyZWNpcGVzWzFde2luLG91dCxidWlsZGVyfToKICBzaGllbGQrdG9yY2gscmVka2V5LGFudmlsCmV2ZW50c1syXXtpZCxyb29tLG9uLGlmLGRvfToKICBldjAscjIsLCxzcGF3bjpyYXRAcjI6Mitsb2NrOnAxCiAgZXYxLHIyLGxlYXZlLGtpbGw6b2dyZSx1bmxvY2s6cDErZngrOnJhZ2VAcGxheWVyCnNvbHV0aW9uc1syXXtpZCxzdGVwc306CiAgczAsdGFrZSBob2x5d2F0ZXI7dGFrZSBzd29yZDttb3ZlIHIxO2VxdWlwIHN3b3JkO2ZpZ2h0O3Rha2UgcG90aW9uO21vdmUgcjI7dXNlIGhvbHl3YXRlcj5yMi4yO2ZpZ2h0O2ZpZ2h0O3Rha2Ugc2hpZWxkO21vdmUgcjA7bW92ZSByMTtjcmFmdCByZWRrZXkvMDt1c2UgcG90aW9uO21vdmUgcjMKICBzMSx0YWtlIGhvbHl3YXRlcjt0YWtlIHN3b3JkO21vdmUgcjE7ZmlnaHQ7dGFrZSBwb3Rpb247ZXF1aXAgc3dvcmQ7bW92ZSByMjt1c2UgaG9seXdhdGVyPnIyLjI7ZmlnaHQ7ZmlnaHQ7dGFrZSBzaGllbGQ7bW92ZSByMDttb3ZlIHIxO2NyYWZ0IHJlZGtleS8wO3VzZSBwb3Rpb247bW92ZSByMwo=,""
+  a2,song.toon,text/toon,YXBwOiBhcG9sbG8KdmVyc2lvbjogMQptb2RlOiBtdXNpYwpsZXZlbDoKICBtdXNpYzogc2ltcGxlCiAgc2Z4OiBzaW1wbGUKc29uZzoKICBicG06IDEzMgogIGJlYXRzUGVyQmFyOiA0CiAgc3RlcHNQZXJCZWF0OiA0CiAga2V5OiBBCiAgc2NhbGU6IG1pbm9yCiAgYmFyczogOAogIGxvb3A6CiAgICBvbjogdHJ1ZQogICAgZnJvbTogMAogICAgdG86IDQKICBtYXN0ZXI6IDAuOAp0cmFja3NbM106CiAgLSBpZDogMQogICAgbmFtZTogTGVhZAogICAgY29sb3I6ICNGRjc5QzYKICAgIGtpbmQ6IG1lbG9kaWMKICAgIHZvbDogMC44CiAgICBwYW46IDAKICAgIG11dGU6IGZhbHNlCiAgICBzb2xvOiBmYWxzZQogICAgY2xpcHNbOF06IDEsMSwxLDEsMCwwLDAsMAogICAgaW5zdDoKICAgICAgZW5naW5lOiBjaGlwCiAgICAgIHZvbDogMC43CiAgICAgIGE6IDAuMDA1CiAgICAgIGQ6IDAuMTUKICAgICAgczogMC42CiAgICAgIHI6IDAuMQogICAgICB3YXZlOiBwdWxzZTI1CiAgICAgIGxwZjogMQogICAgICB2aWJEZXB0aDogMC4xNQogICAgICB2aWJTcGVlZDogNS41CiAgICAgIGdsaWRlOiAwCiAgICAgIHByZXNldDogbGVhZAogIC0gaWQ6IDIKICAgIG5hbWU6IEJhc3MKICAgIGNvbG9yOiAjOEJFOUZECiAgICBraW5kOiBtZWxvZGljCiAgICB2b2w6IDAuOAogICAgcGFuOiAwCiAgICBtdXRlOiBmYWxzZQogICAgc29sbzogZmFsc2UKICAgIGNsaXBzWzhdOiAyLDIsMiwyLDAsMCwwLDAKICAgIGluc3Q6CiAgICAgIGVuZ2luZTogY2hpcAogICAgICB2b2w6IDAuNwogICAgICBhOiAwLjAwMgogICAgICBkOiAwLjEKICAgICAgczogMC45CiAgICAgIHI6IDAuMDUKICAgICAgd2F2ZTogdHJpCiAgICAgIGxwZjogMQogICAgICB2aWJEZXB0aDogMAogICAgICB2aWJTcGVlZDogNQogICAgICBnbGlkZTogMAogICAgICBwcmVzZXQ6IGJhc3MKICAtIGlkOiAzCiAgICBuYW1lOiBEcnVtcwogICAgY29sb3I6ICNCRDkzRjkKICAgIGtpbmQ6IGRydW0KICAgIHZvbDogMC44CiAgICBwYW46IDAKICAgIG11dGU6IGZhbHNlCiAgICBzb2xvOiBmYWxzZQogICAgY2xpcHNbOF06IDMsMywzLDMsMCwwLDAsMAogICAga2l0OgogICAgICBtb2RlOiBzeW50aAogICAgICBwYWNrOiB2Y3NsLWtpdAogICAgICByb3dzWzhde25hbWUsdm9sLHR1bmUsZGVjYXl9OgogICAgICAgIGtpY2ssMC45LDAuNSwwLjUKICAgICAgICBzbmFyZSwwLjcsMC41LDAuNQogICAgICAgIGhhdC1jbG9zZWQsMC40NSwwLjUsMC40CiAgICAgICAgaGF0LW9wZW4sMC40LDAuNSwwLjUKICAgICAgICB0b20tbG8sMC43LDAuNCwwLjUKICAgICAgICB0b20taGksMC42NSwwLjYsMC41CiAgICAgICAgY2xhcCwwLjYsMC41LDAuNQogICAgICAgIGNyYXNoLDAuNCwwLjUsMC42CnBhdHRlcm5zWzNdOgogIC0gaWQ6IDEKICAgIHRyYWNrOiAxCiAgICBiYXJzOiAxCiAgICBub3Rlc1s2XXtzdGVwLGxlbixwaXRjaCx2ZWwsY2VudHN9OgogICAgICAwLDIsNjksMC44LDAKICAgICAgMiwyLDcyLDAuOCwwCiAgICAgIDQsNCw3NiwwLjgsMAogICAgICA4LDIsNzQsMC44LDAKICAgICAgMTAsMiw3MiwwLjgsMAogICAgICAxMiw0LDcxLDAuOCwwCiAgLSBpZDogMgogICAgdHJhY2s6IDIKICAgIGJhcnM6IDEKICAgIG5vdGVzWzJde3N0ZXAsbGVuLHBpdGNoLHZlbCxjZW50c306CiAgICAgIDAsNCw0NSwwLjgsMAogICAgICA4LDQsNDUsMC44LDAKICAtIGlkOiAzCiAgICB0cmFjazogMwogICAgYmFyczogMQogICAgbm90ZXNbMTBde3N0ZXAsbGVuLHBpdGNoLHZlbCxjZW50c306CiAgICAgIDAsMSwwLDAuOSwwCiAgICAgIDQsMSwwLDAuOSwwCiAgICAgIDgsMSwwLDAuOSwwCiAgICAgIDEyLDEsMCwwLjksMAogICAgICA0LDEsMSwwLjgsMAogICAgICAxMiwxLDEsMC44LDAKICAgICAgMiwxLDIsMC42LDAKICAgICAgNiwxLDIsMC42LDAKICAgICAgMTAsMSwyLDAuNiwwCiAgICAgIDE0LDEsMiwwLjYsMAprZXlib2FyZDoKICBuYW1lOiBGTCBzdHlsZQogIHJvb3Q6IDQ4CiAgb2N0RG93bjogTWludXMKICBvY3RVcDogRXF1YWwKICBrZXlzWzI5XXtjb2RlLG5vdGUsY2VudHMsaHp9OgogICAgS2V5Wiw0OCwwLDAKICAgIEtleVMsNDksMCwwCiAgICBLZXlYLDUwLDAsMAogICAgS2V5RCw1MSwwLDAKICAgIEtleUMsNTIsMCwwCiAgICBLZXlWLDUzLDAsMAogICAgS2V5Ryw1NCwwLDAKICAgIEtleUIsNTUsMCwwCiAgICBLZXlILDU2LDAsMAogICAgS2V5Tiw1NywwLDAKICAgIEtleUosNTgsMCwwCiAgICBLZXlNLDU5LDAsMAogICAgS2V5USw2MCwwLDAKICAgIERpZ2l0Miw2MSwwLDAKICAgIEtleVcsNjIsMCwwCiAgICBEaWdpdDMsNjMsMCwwCiAgICBLZXlFLDY0LDAsMAogICAgS2V5Uiw2NSwwLDAKICAgIERpZ2l0NSw2NiwwLDAKICAgIEtleVQsNjcsMCwwCiAgICBEaWdpdDYsNjgsMCwwCiAgICBLZXlZLDY5LDAsMAogICAgRGlnaXQ3LDcwLDAsMAogICAgS2V5VSw3MSwwLDAKICAgIEtleUksNzIsMCwwCiAgICBEaWdpdDksNzMsMCwwCiAgICBLZXlPLDc0LDAsMAogICAgRGlnaXQwLDc1LDAsMAogICAgS2V5UCw3NiwwLDAKc2Z4WzBdOgptaXhlc1swXToKc2V0c1swXToKZXhwb3J0OgogIHJhdGU6IDQ0MTAwCiAgYml0czogMTYKICBub3JtYWxpemU6IHRydWUK,""
+  a3,keep-sketch.svg,image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzIwIDIwMCI+PHJlY3Qgd2lkdGg9IjMyMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiMyODJBMzYiLz48cmVjdCB4PSIyNCIgeT0iMjQiIHdpZHRoPSIxMjAiIGhlaWdodD0iNzAiIHJ4PSI2IiBmaWxsPSIjNDQ0NzVBIi8+PHJlY3QgeD0iMTc2IiB5PSIyNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSI3MCIgcng9IjYiIGZpbGw9IiM0NDQ3NUEiLz48cmVjdCB4PSIxMDAiIHk9IjEyMCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSI1NiIgcng9IjYiIGZpbGw9IiNGRjc5QzYiLz48cGF0aCBkPSJNODQgOTRMMTQwIDEyME0yMzYgOTRMMTgwIDEyMCIgc3Ryb2tlPSIjRjhGOEYyIiBzdHJva2Utd2lkdGg9IjMiLz48dGV4dCB4PSIxNjAiIHk9IjE1NCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlNlZ29lIFVJIiBmb250LXNpemU9IjE2IiBmaWxsPSIjMjgyQTM2Ij5ib3NzPC90ZXh0Pjwvc3ZnPg==,""

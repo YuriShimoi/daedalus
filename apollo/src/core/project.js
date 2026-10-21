@@ -38,7 +38,7 @@ DAE_CORE(DAE => {
         tracks: [], patterns: [],
         keyboard: DAE.Keymap.make('FL style'),
         sfx: [], mixes: [], sets: [],
-        export: { rate: 44100, bits: 16, normalize: true },
+        export: { rate: 44100, bits: 16, normalize: true, format: 'wav' },
       };
       p.tracks.push(Project.track(p, 'melodic', 'Lead'));
       p.tracks.push(Project.track(p, 'melodic', 'Bass'));
@@ -74,7 +74,7 @@ DAE_CORE(DAE => {
         tracks: [], patterns: [],
         keyboard: DAE.Keymap.normalize(raw?.keyboard),
         sfx: [], mixes: [], sets: [],
-        export: { rate: num(raw?.export?.rate, 44100), bits: num(raw?.export?.bits, 16), normalize: bool(raw?.export?.normalize, true) },
+        export: { rate: num(raw?.export?.rate, 44100), bits: num(raw?.export?.bits, 16), normalize: bool(raw?.export?.normalize, true), format: raw?.export?.format === 'opus' ? 'opus' : 'wav' },
       };
       const bars = p.song.bars;
       for(const t of (raw?.tracks ?? d.tracks).slice(0, MAX_TRACKS)) {

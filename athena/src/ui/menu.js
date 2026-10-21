@@ -1,50 +1,25 @@
 // Right-click menu on the graph: room, passage or empty-space actions (edit mode only).
 class Menu {
-  static #$el = null;
   static #clip = { room: null, lock: null };   // copied room settings / passage lock
 
   /** Room fields copied by "Copy settings" (id, flags, position and chests stay with the room). */
   static ROOM_KEYS = ['weight', 'mark', 'enemies', 'items', 'builders'];
 
   static open(e, hit, at) {
-    Menu.close();
+    DAE.Menu.close();
     if(App.mode !== 'edit') return;
     const items = hit?.kind === 'room' ? Menu.#roomItems(hit.id, at)
       : hit?.kind === 'passage' ? Menu.#passageItems(hit.id)
       : Menu.#canvasItems(at);
     if(hit) App.select(hit.id);
-
-    const $m = Menu.#$el = document.createElement('div');
-    $m.className = 'ctx';
-    for(const it of items) {
-      if(it === '-') { $m.insertAdjacentHTML('beforeend', '<hr>'); continue; }
-      if(typeof it === 'string') { $m.insertAdjacentHTML('beforeend', `<h4>${Tables.esc(it)}</h4>`); continue; }
-      const [icon, label, fn, o = {}] = it;
-      const $b = document.createElement('button');
-      $b.className = [o.on && 'on', o.danger && 'danger'].filter(Boolean).join(' ');
-      $b.disabled = !!o.disabled;
-      $b.innerHTML = `${icon ? DAE.Icons.html(icon) : '<i></i>'}<span>${Tables.esc(label)}</span>${o.key ? `<kbd>${o.key}</kbd>` : ''}`;
-      $b.onclick = () => { Menu.close(); fn(); };
-      $m.append($b);
-    }
-    document.body.append($m);
-
-    // keep it inside the window
-    const r = $m.getBoundingClientRect();
-    $m.style.left = Math.min(e.clientX, innerWidth - r.width - 4) + 'px';
-    $m.style.top = Math.min(e.clientY, innerHeight - r.height - 4) + 'px';
+    DAE.Menu.show(e.clientX, e.clientY, items);   // shared/menu.js
   }
 
   static close() {
-    Menu.#$el?.remove();
-    Menu.#$el = null;
+    DAE.Menu.close();
   }
 
   static init() {
-    document.addEventListener('mousedown', e => { if(!e.target.closest?.('.ctx')) Menu.close(); });
-    document.addEventListener('keydown', e => { if(e.key === 'Escape') Menu.close(); });
-    window.addEventListener('blur', Menu.close);
-    window.addEventListener('resize', Menu.close);
     document.getElementById('graph').addEventListener('wheel', Menu.close);
   }
 

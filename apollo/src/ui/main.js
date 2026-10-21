@@ -16,14 +16,7 @@ Audio.onStatus = st => {
   }
 };
 
-// range fill: --p follows the value (on input, and for every slider a render adds or resets)
-const fillRange = $i => {
-  const min = $i.min === '' ? 0 : Number($i.min), max = $i.max === '' ? 100 : Number($i.max);
-  $i.style.setProperty('--p', max > min ? (Number($i.value) - min) / (max - min) : 0);
-};
-addEventListener('input', e => { if(e.target.type === 'range') fillRange(e.target); }, true);
-new MutationObserver(() => document.querySelectorAll('input[type=range]').forEach(fillRange))
-  .observe(document.body, { childList: true, subtree: true });
+DAE.UI.ranges();   // shared/ui.js: sliders fill up to their thumb
 
 addEventListener('pointerdown', () => { Audio.resume(); }, { once: true, capture: true });
 addEventListener('pointerup', () => Playlist.endPaint());
@@ -56,4 +49,13 @@ addEventListener('keyup', e => Keyboard.keyup(e));
 
 addEventListener('beforeunload', e => { if(App.dirty) e.preventDefault(); });
 
-Start.show();
+// stored lists first (recent, autosave, templates), then a project sent from Hestia (?open=), else the start screen
+Files.init().then(() => {
+  const handed = DAE.Handoff.take();
+  let opened = false;
+  if(handed) {
+    try { App.load(DAE.Project.parse(handed.text), handed.name.replace(/\.\w+$/, '') + '.toon'); opened = true; }
+    catch(err) { alert(`Can't read ${handed.name}:\n${err.message}`); }
+  }
+  if(!opened) Start.show();
+});

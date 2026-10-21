@@ -249,12 +249,13 @@ class Sfx {
         <button data-tab="sets" class="${Sfx.tab === 'sets' ? 'on' : ''}">Sets</button></div>${body}
       <div class="section mt">Export</div>
       <div class="opts">
-        <span>rate</span><div class="seg">${[44100, 22050, 11025, 8000].map(r => `<button data-rate="${r}" class="${ex.rate === r ? 'on' : ''}">${Math.round(r / 1000)}k</button>`).join('')}</div>
-        <span>bits</span><div class="seg">${[16, 8].map(b => `<button data-bits="${b}" class="${ex.bits === b ? 'on' : ''}">${b}</button>`).join('')}</div>
+        <span>format</span><div class="seg">${Object.entries(Files.FORMATS).map(([f, x]) => `<button data-format="${f}" class="${ex.format === f ? 'on' : ''}" title="${x.title}">${x.label}</button>`).join('')}</div>
+        <span class="${ex.format === 'opus' ? 'off' : ''}">rate</span><div class="seg${ex.format === 'opus' ? ' off' : ''}">${[44100, 22050, 11025, 8000].map(r => `<button data-rate="${r}" class="${ex.rate === r ? 'on' : ''}">${Math.round(r / 1000)}k</button>`).join('')}</div>
+        <span class="${ex.format === 'opus' ? 'off' : ''}">bits</span><div class="seg${ex.format === 'opus' ? ' off' : ''}">${[16, 8].map(b => `<button data-bits="${b}" class="${ex.bits === b ? 'on' : ''}">${b}</button>`).join('')}</div>
         <span>normalize</span><div class="seg"><button data-norm="1" class="${ex.normalize ? 'on' : ''}">on</button><button data-norm="0" class="${ex.normalize ? '' : 'on'}">off</button></div>
       </div>
       <div class="chips" style="margin-top:10px">
-        <button class="primary" id="ex-one">${UI.icon('file-export')} WAV</button>
+        <button class="primary" id="ex-one">${UI.icon('file-export')} ${Files.FORMATS[ex.format].label}</button>
         <button id="ex-many" title="${Sfx.tab === 'sets' && Sfx.setSel ? 'Every item of the set' : 'Every sound and mix'}">${Sfx.tab === 'sets' && Sfx.setSel ? 'Whole set' : 'All sounds'}</button>
         <button id="ex-copy" title="Copy params as text">${UI.icon('copy')}</button><button id="ex-paste" title="Paste params from text">${UI.icon('paste')}</button>
       </div>`;
@@ -293,6 +294,7 @@ class Sfx {
       const st = q.sets.find(x => x.id === Sfx.setSel);
       if(!st.items.includes(App.sfxSel)) st.items.push(App.sfxSel);
     }, 'none'));
+    $r.querySelectorAll('[data-format]').forEach($b => $b.onclick = () => App.change(() => { ex.format = $b.dataset.format; }, 'none'));
     $r.querySelectorAll('[data-rate]').forEach($b => $b.onclick = () => App.change(() => { ex.rate = Number($b.dataset.rate); }, 'none'));
     $r.querySelectorAll('[data-bits]').forEach($b => $b.onclick = () => App.change(() => { ex.bits = Number($b.dataset.bits); }, 'none'));
     $r.querySelectorAll('[data-norm]').forEach($b => $b.onclick = () => App.change(() => { ex.normalize = $b.dataset.norm === '1'; }, 'none'));

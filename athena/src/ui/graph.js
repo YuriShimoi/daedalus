@@ -1,7 +1,8 @@
 // Graph view: the core SVG renderer inside a pan/zoom viewport, plus editing gestures.
 class Graph {
   static $el = null;
-  static vb = { x: 0, y: 0, w: 800, h: 600 };
+  static view = DAE.View.make(0, 0, 1);   // shared/viewport.js: { x, y, zoom }
+  static ZOOM = [0.04, 6];
   static GRID = 40;                 // snap step, shown by the dot grid
   static #drag = null;
 
@@ -45,13 +46,16 @@ class Graph {
     return Graph.$el.querySelector('svg');
   }
 
+  static #rect() {
+    const r = Graph.$el.getBoundingClientRect();
+    return r.width && r.height ? r : { left: r.left, top: r.top, width: 800, height: 600 };
+  }
+
   static #apply() {
     const $svg = Graph.#svg();
     if(!$svg) return;
-    // keep the viewBox aspect equal to the element, so zoom math stays simple
-    const r = Graph.$el.getBoundingClientRect();
-    if(r.width && r.height) Graph.vb.h = Graph.vb.w * r.height / r.width;
-    $svg.setAttribute('viewBox', `${Graph.vb.x} ${Graph.vb.y} ${Graph.vb.w} ${Graph.vb.h}`);
+    const b = DAE.View.box(Graph.view, Graph.#rect());
+    $svg.setAttribute('viewBox', `${b.x} ${b.y} ${b.w} ${b.h}`);
     $svg.removeAttribute('width');
     $svg.removeAttribute('height');
   }
@@ -62,27 +66,21 @@ class Graph {
     const pad = 90;
     const minX = Math.min(...pts.map(p => p.x)) - pad, maxX = Math.max(...pts.map(p => p.x)) + pad;
     const minY = Math.min(...pts.map(p => p.y)) - pad, maxY = Math.max(...pts.map(p => p.y)) + pad;
-    const r = Graph.$el.getBoundingClientRect();
-    const aspect = r.width && r.height ? r.width / r.height : 4 / 3;
-    let w = Math.max(maxX - minX, 400), h = Math.max(maxY - minY, 300);
-    if(w / h < aspect) w = h * aspect;
-    Graph.vb = { x: (minX + maxX - w) / 2, y: (minY + maxY - w / aspect) / 2, w, h: w / aspect };
+    const w = Math.max(maxX - minX, 400), h = Math.max(maxY - minY, 300);
+    DAE.View.fit(Graph.view, Graph.#rect(), { x: (minX + maxX - w) / 2, y: (minY + maxY - h) / 2, w, h }, { pad: 0, min: Graph.ZOOM[0], max: Graph.ZOOM[1] });
     Graph.#apply();
   }
 
+  /** Zooms by f (> 1: in) around a map point (the center when omitted). */
   static zoom(f, at) {
-    const v = Graph.vb;
-    const cx = at?.x ?? v.x + v.w / 2, cy = at?.y ?? v.y + v.h / 2;
-    const w = Math.min(Math.max(v.w / f, 150), 20000);
-    const k = w / v.w;
-    Graph.vb = { x: cx - (cx - v.x) * k, y: cy - (cy - v.y) * k, w, h: v.h * k };
+    const r = Graph.#rect(), s = at ? DAE.View.toScreen(Graph.view, r, at.x, at.y) : { x: undefined, y: undefined };
+    DAE.View.zoomAt(Graph.view, r, f, s.x, s.y, Graph.ZOOM[0], Graph.ZOOM[1]);
     Graph.#apply();
   }
 
   /** Mouse event -> map coordinates. */
   static #point(e) {
-    const r = Graph.$el.getBoundingClientRect();
-    return { x: Graph.vb.x + (e.clientX - r.left) / r.width * Graph.vb.w, y: Graph.vb.y + (e.clientY - r.top) / r.height * Graph.vb.h };
+    return DAE.View.toWorld(Graph.view, Graph.#rect(), e.clientX, e.clientY);
   }
   //#endregion
 
@@ -108,7 +106,7 @@ class Graph {
     if(hit?.kind === 'room' && edit) Graph.#drag = { kind: 'move', id: hit.id, start: p, from: { ...App.pos.get(hit.id) }, moved: false };
     else if(hit) Graph.#drag = { kind: 'click', hit };
     else {
-      Graph.#drag = { kind: 'pan', sx: e.clientX, sy: e.clientY, vb: { ...Graph.vb }, moved: false };
+      Graph.#drag = { kind: 'pan', sx: e.clientX, sy: e.clientY, view: { ...Graph.view }, moved: false };
       Graph.$el.classList.add('panning');
     }
   }
@@ -117,10 +115,8 @@ class Graph {
     const d = Graph.#drag;
     if(!d) return;
     if(d.kind === 'pan') {
-      const r = Graph.$el.getBoundingClientRect();
-      const dx = (e.clientX - d.sx) / r.width * d.vb.w, dy = (e.clientY - d.sy) / r.height * d.vb.h;
       if(Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 3) d.moved = true;
-      Graph.vb = { ...d.vb, x: d.vb.x - dx, y: d.vb.y - dy };
+      Graph.view = DAE.View.pan({ ...d.view }, e.clientX - d.sx, e.clientY - d.sy);
       Graph.#apply();
     }
     else if(d.kind === 'move') {
@@ -128,9 +124,13 @@ class Graph {
       if(!d.moved && Math.hypot(p.x - d.start.x, p.y - d.start.y) < 6) return;
       d.moved = true;
       Graph.$el.classList.add('moving');
-      const to = Graph.snap({ x: d.from.x + p.x - d.start.x, y: d.from.y + p.y - d.start.y });
+      // shared/snap.js: line up with other rooms (pink guide), else the grid; Alt moves freely
+      const raw = { x: p.x - d.start.x, y: p.y - d.start.y }, others = [...App.pos].filter(([id]) => id !== d.id).map(([, q]) => ({ x: q.x, y: q.y, w: 0, h: 0 }));
+      const s = e.altKey ? { off: raw, guides: [] } : DAE.Snap.move({ x: d.from.x, y: d.from.y, w: 0, h: 0 }, raw, others, { tol: 8 / Graph.view.zoom, grid: Graph.GRID });
+      const to = { x: Math.round(d.from.x + s.off.x), y: Math.round(d.from.y + s.off.y) };
+      d.guides = s.guides;
       const cur = App.pos.get(d.id);
-      if(cur.x === to.x && cur.y === to.y) return;
+      if(cur.x === to.x && cur.y === to.y) return Graph.#guides(d.guides);
       if(!d.pushed) {   // one undo step per drag
         d.pushed = true;
         App.history.push(App.snapshot());
@@ -139,6 +139,7 @@ class Graph {
       }
       App.pos.set(d.id, to);   // saved in the file (rooms x,y)
       App.render();
+      Graph.#guides(d.guides);
     }
     else if(d.kind === 'link') {
       const p = Graph.#point(e);
@@ -164,9 +165,21 @@ class Graph {
     }
   }
 
+  /** Snap guide lines over the map (cleared by the next render). */
+  static #guides(list) {
+    const $svg = Graph.#svg();
+    if(!$svg) return;
+    $svg.querySelector('#snap-guides')?.remove();
+    if(!list?.length) return;
+    const w = 1.5 / Graph.view.zoom, ext = 60;
+    $svg.insertAdjacentHTML('beforeend', `<g id="snap-guides" pointer-events="none" stroke="${DAE.Svg.C.pink ?? '#FF79C6'}" stroke-width="${w}" stroke-dasharray="${4 / Graph.view.zoom}">`
+      + list.map(g => g.ax === 'x' ? `<line x1="${g.at}" y1="${g.lo - ext}" x2="${g.at}" y2="${g.hi + ext}"/>` : `<line x1="${g.lo - ext}" y1="${g.at}" x2="${g.hi + ext}" y2="${g.at}"/>`).join('') + '</g>');
+  }
+
   static #up(e) {
     const d = Graph.#drag;
     Graph.#drag = null;
+    Graph.#svg()?.querySelector('#snap-guides')?.remove();
     Graph.$el.classList.remove('panning', 'moving');
     if(!d) return;
     // double-clicks come from the mouseup click count: the first click re-renders, so a dblclick event would hit a removed node

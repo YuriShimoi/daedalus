@@ -33,7 +33,7 @@ Apollo is the music and sound effects tool in Daedalus. Open `apollo/index.html`
 - **Sounds:** click to select and play, double-click to rename, delete. Full adds duplicate.
 - **Mixer** (Full): "New mix from this sound", then up to 5 layers, each with a delay (ms) and volume (%). A mix is a sound of its own.
 - **Sets** (Full): "Variants" makes 6 mutations of the current sound into a set. Add or remove items, play a random one, export the set.
-- **Export** (Full): rate 44k / 22k / 11k / 8k, 16 or 8 bit, normalize. "Whole set" / "All sounds" write one WAV each (into a folder when the browser allows). The copy / paste icons move params as an `apollo-sfx:` text code.
+- **Export** (Full): format **WAV** or **Opus** (a small `.opus` file at 48 kHz; rate and bits apply to WAV), rate 44k / 22k / 11k / 8k, 16 or 8 bit, normalize. "Whole set" / "All sounds" write one file each (into a folder when the browser allows). The copy / paste icons move params as an `apollo-sfx:` text code.
 
 ## Keyboard (both modes)
 - Physical keys play the selected track (music) or the current sound, pitched (sfx). Drum tracks: the first key plays the first row, and so on.
@@ -46,7 +46,7 @@ Apollo is the music and sound effects tool in Daedalus. Open `apollo/index.html`
 
 ## Files
 - Ctrl+S saves the project (`.toon`; Shift: save as), Ctrl+O opens, Ctrl+Z / Ctrl+Y undo / redo, Space plays / stops.
-- **WAV** (header): music exports the loop range as a seamless loop when Loop is on (release tails wrap onto the start), else the whole song (44.1 kHz, 16-bit, stereo). SFX exports the current sound with the export settings.
+- **Export** (header button, labeled with the last format): pick **WAV** (lossless, 44.1 kHz 16-bit stereo) or **Opus** (about 1/10 the size, 48 kHz). Music exports the loop range as a seamless loop when Loop is on (release tails wrap onto the start), else the whole song. SFX exports the current sound with the export settings. Opus needs a browser with WebCodecs (Chrome, Edge, Firefox); without it the file comes out as WAV. Game engines often read Ogg Vorbis but not Opus: keep WAV for those.
 - Autosave keeps the open project in `localStorage` (convenience only; save to a file to keep it).
 
 ## CLI

@@ -1,4 +1,4 @@
-// Open / save (File System Access API, with upload/download fallback) and the generate dialog.
+// Open / save (shared/files.js: File System Access API, with upload / download fallback) and the generate dialog.
 class Files {
   static handle = null;
   static #types = [{ description: 'Athena map', accept: { 'text/plain': ['.toon'], 'application/json': ['.json'] } }];
@@ -11,27 +11,14 @@ class Files {
 
   static async open() {
     if(App.dirty && !confirm('Discard unsaved changes?')) return;
-    if(window.showOpenFilePicker) {
-      try {
-        const [handle] = await window.showOpenFilePicker({ types: Files.#types });
-        const file = await handle.getFile();
-        if(Files.#read(await file.text(), file.name)) Files.handle = handle;
-        return;
-      }
-      catch(err) {
-        if(err.name === 'AbortError') return;
-      }
-    }
-    const $in = document.getElementById('file-input');
-    $in.value = '';
-    $in.onchange = async () => {
-      const file = $in.files[0];
-      if(file) {
-        Files.handle = null;
-        Files.#read(await file.text(), file.name);
-      }
-    };
-    $in.click();
+    const f = await DAE.FileIO.open({ types: Files.#types, accept: '.toon,.json' });
+    if(f && Files.#read(f.text, f.name)) Files.handle = f.handle;
+  }
+
+  /** Opens a map handed over by another tool (Hestia). */
+  static openText(text, name) {
+    Files.handle = null;
+    return Files.#read(text, name);
   }
 
   static #read(text, name) {
@@ -49,31 +36,12 @@ class Files {
   }
 
   static async save(as = false) {
-    const text = DAE.Model.stringify(App.toSave());
-    if(window.showSaveFilePicker) {
-      try {
-        if(as || !Files.handle) Files.handle = await window.showSaveFilePicker({ suggestedName: App.fileName, types: Files.#types });
-        const w = await Files.handle.createWritable();
-        await w.write(text);
-        await w.close();
-        App.fileName = Files.handle.name;
-        App.setDirty(false);
-        return;
-      }
-      catch(err) {
-        if(err.name === 'AbortError') return;
-      }
-    }
     let name = App.fileName;
-    if(as) name = prompt('File name', name) ?? '';
-    if(!name) return;
     if(!name.endsWith('.toon')) name += '.toon';
-    const $a = document.createElement('a');
-    $a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain' }));
-    $a.download = name;
-    $a.click();
-    setTimeout(() => URL.revokeObjectURL($a.href), 1000);
-    App.fileName = name;
+    const h = await DAE.FileIO.save(DAE.Model.stringify(App.toSave()), { name, types: Files.#types, handle: Files.handle, as, ask: true });
+    if(h === undefined) return;
+    Files.handle = h;
+    if(h) App.fileName = h.name;
     App.setDirty(false);
   }
 

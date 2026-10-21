@@ -72,7 +72,7 @@ test('kit, keyboard and export', () => {
   assert.strictEqual(p.keyboard.keys[1].cents, -20);
   Edit.apply(p, ['keys just C']);
   assert.notStrictEqual(p.keyboard.keys[4].cents, 0);
-  assert.deepStrictEqual(p.export, { rate: 22050, bits: 8, normalize: true });
+  assert.deepStrictEqual(p.export, { rate: 22050, bits: 8, normalize: true, format: 'wav' });
 });
 
 test('sounds, mixes and sets', () => {

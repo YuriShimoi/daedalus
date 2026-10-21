@@ -15,6 +15,7 @@ class App {
 
   static init() {
     DAE.Icons.mount();
+    DAE.UI.ranges();
     App.#toolbar();
     Graph.init(document.getElementById('graph'));
     Inspector.init();
@@ -22,6 +23,8 @@ class App {
     SolverPanel.init(document.getElementById('dock'));
     App.#keys();
     App.load(App.starter(), 'untitled.toon');
+    const handed = DAE.Handoff.take();   // a map sent from Hestia (?open=)
+    if(handed) Files.openText(handed.text, handed.name);
     window.addEventListener('beforeunload', e => { if(App.dirty) e.preventDefault(); });
   }
 

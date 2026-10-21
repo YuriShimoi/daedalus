@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const DAE = require('./src/core/index.js');
 require('../shared/icons.js');
+require('../shared/cli.js');
 const { Model, Validate, Check, Solver, Rules, Generator, Svg, Layout } = DAE;
 
 const HELP = `athena <command> [options]
@@ -24,23 +25,7 @@ const HELP = `athena <command> [options]
   convert  map.toon --to json|toon [-o out]`;
 
 //#region [ Arguments ]
-function parse(argv) {
-  const args = { _: [] };
-  for(let i = 0; i < argv.length; i++) {
-    const a = argv[i];
-    if(a === '-o') args.o = argv[++i];
-    else if(a.startsWith('--')) {
-      const key = a.slice(2);
-      const next = argv[i + 1];
-      if(next === undefined || next.startsWith('--') || next === '-o') args[key] = true;
-      else args[key] = argv[++i];
-    }
-    else args._.push(a);
-  }
-  return args;
-}
-
-const value = v => v === 'true' ? true : v === 'false' ? false : v !== '' && !isNaN(Number(v)) ? Number(v) : v;
+const { parse, value } = DAE.Cli;
 
 function load(file) {
   if(!file) throw new Error('missing map file');
@@ -244,21 +229,7 @@ const commands = {
 //#endregion
 
 function main(argv) {
-  const args = parse(argv);
-  const cmd = args._.shift();
-  if(!cmd || cmd === 'help' || args.help) {
-    console.log(HELP);
-    return cmd ? 0 : 1;
-  }
-  if(!commands[cmd]) {
-    console.error(`unknown command "${cmd}"\n\n${HELP}`);
-    return 1;
-  }
-  try { return commands[cmd](args); }
-  catch(err) {
-    console.error(`athena ${cmd}: ${err.message}`);
-    return 1;
-  }
+  return DAE.Cli.run('athena', HELP, commands, argv);
 }
 
 if(require.main === module) process.exitCode = main(process.argv.slice(2));

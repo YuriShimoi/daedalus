@@ -56,3 +56,28 @@ input, select, textarea {
 ::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+/* range: flat track filled up to the thumb center, thumb flush with both ends (so the first and last
+   steps sit at the edges). --rc is the color (the tool accent); --p (0..1) is kept by shared/ui.js. */
+input[type=range] { --rc: var(--accent); appearance: none; height: 14px; margin: 0; padding: 0; background: transparent; cursor: pointer; }
+input[type=range]::-webkit-slider-runnable-track { height: 4px; border-radius: var(--r-xs);
+  background: linear-gradient(var(--rc), var(--rc)) 0 / calc(7px + (100% - 14px) * var(--p, 0)) 100% no-repeat, var(--line); }
+input[type=range]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; margin-top: -5px; border-radius: 50%; background: var(--rc); border: none; }
+input[type=range]::-moz-range-track { height: 4px; border-radius: var(--r-xs); background: var(--line); }
+input[type=range]::-moz-range-progress { height: 4px; border-radius: var(--r-xs); background: var(--rc); }
+input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--rc); border: none; }
+
+/* right-click menu (shared/menu.js) */
+.ctx { position: fixed; z-index: 50; min-width: 200px; background: var(--deep); border-radius: var(--r-lg); padding: 4px; box-shadow: 0 0 0 1px var(--line); }
+.ctx h4 { margin: 2px 8px 4px; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.ctx hr { border: 0; height: 1px; background: var(--line); margin: 4px 6px; }
+.ctx button { display: flex; align-items: center; gap: 8px; width: 100%; padding: 5px 8px; background: none; color: var(--text2); text-align: left; border-radius: var(--r-sm); font-size: 13px; }
+.ctx button:hover:not(:disabled) { background: var(--raised); color: var(--text); }
+.ctx button:disabled { background: none; color: var(--muted); opacity: .6; }
+.ctx button > svg, .ctx button > i { width: 14px; height: 14px; flex: none; color: var(--muted); }
+.ctx button.on > svg { color: var(--accent); }
+.ctx button.on span { color: var(--text); }
+.ctx button.on::after { content: ''; width: 6px; height: 6px; border-radius: 3px; background: var(--accent); margin-left: auto; }
+.ctx button.danger:hover:not(:disabled), .ctx button.danger:hover > svg { color: var(--bad); }
+.ctx kbd { margin-left: auto; font: 11px var(--mono); color: var(--muted); }
+

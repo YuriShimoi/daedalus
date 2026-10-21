@@ -1,0 +1,157 @@
+app: apollo
+version: 1
+mode: music
+level:
+  music: simple
+  sfx: simple
+song:
+  bpm: 132
+  beatsPerBar: 4
+  stepsPerBeat: 4
+  key: A
+  scale: minor
+  bars: 8
+  loop:
+    on: true
+    from: 0
+    to: 4
+  master: 0.8
+tracks[3]:
+  - id: 1
+    name: Lead
+    color: #FF79C6
+    kind: melodic
+    vol: 0.8
+    pan: 0
+    mute: false
+    solo: false
+    clips[8]: 1,1,1,1,0,0,0,0
+    inst:
+      engine: chip
+      vol: 0.7
+      a: 0.005
+      d: 0.15
+      s: 0.6
+      r: 0.1
+      wave: pulse25
+      lpf: 1
+      vibDepth: 0.15
+      vibSpeed: 5.5
+      glide: 0
+      preset: lead
+  - id: 2
+    name: Bass
+    color: #8BE9FD
+    kind: melodic
+    vol: 0.8
+    pan: 0
+    mute: false
+    solo: false
+    clips[8]: 2,2,2,2,0,0,0,0
+    inst:
+      engine: chip
+      vol: 0.7
+      a: 0.002
+      d: 0.1
+      s: 0.9
+      r: 0.05
+      wave: tri
+      lpf: 1
+      vibDepth: 0
+      vibSpeed: 5
+      glide: 0
+      preset: bass
+  - id: 3
+    name: Drums
+    color: #BD93F9
+    kind: drum
+    vol: 0.8
+    pan: 0
+    mute: false
+    solo: false
+    clips[8]: 3,3,3,3,0,0,0,0
+    kit:
+      mode: synth
+      pack: vcsl-kit
+      rows[8]{name,vol,tune,decay}:
+        kick,0.9,0.5,0.5
+        snare,0.7,0.5,0.5
+        hat-closed,0.45,0.5,0.4
+        hat-open,0.4,0.5,0.5
+        tom-lo,0.7,0.4,0.5
+        tom-hi,0.65,0.6,0.5
+        clap,0.6,0.5,0.5
+        crash,0.4,0.5,0.6
+patterns[3]:
+  - id: 1
+    track: 1
+    bars: 1
+    notes[6]{step,len,pitch,vel,cents}:
+      0,2,69,0.8,0
+      2,2,72,0.8,0
+      4,4,76,0.8,0
+      8,2,74,0.8,0
+      10,2,72,0.8,0
+      12,4,71,0.8,0
+  - id: 2
+    track: 2
+    bars: 1
+    notes[2]{step,len,pitch,vel,cents}:
+      0,4,45,0.8,0
+      8,4,45,0.8,0
+  - id: 3
+    track: 3
+    bars: 1
+    notes[10]{step,len,pitch,vel,cents}:
+      0,1,0,0.9,0
+      4,1,0,0.9,0
+      8,1,0,0.9,0
+      12,1,0,0.9,0
+      4,1,1,0.8,0
+      12,1,1,0.8,0
+      2,1,2,0.6,0
+      6,1,2,0.6,0
+      10,1,2,0.6,0
+      14,1,2,0.6,0
+keyboard:
+  name: FL style
+  root: 48
+  octDown: Minus
+  octUp: Equal
+  keys[29]{code,note,cents,hz}:
+    KeyZ,48,0,0
+    KeyS,49,0,0
+    KeyX,50,0,0
+    KeyD,51,0,0
+    KeyC,52,0,0
+    KeyV,53,0,0
+    KeyG,54,0,0
+    KeyB,55,0,0
+    KeyH,56,0,0
+    KeyN,57,0,0
+    KeyJ,58,0,0
+    KeyM,59,0,0
+    KeyQ,60,0,0
+    Digit2,61,0,0
+    KeyW,62,0,0
+    Digit3,63,0,0
+    KeyE,64,0,0
+    KeyR,65,0,0
+    Digit5,66,0,0
+    KeyT,67,0,0
+    Digit6,68,0,0
+    KeyY,69,0,0
+    Digit7,70,0,0
+    KeyU,71,0,0
+    KeyI,72,0,0
+    Digit9,73,0,0
+    KeyO,74,0,0
+    Digit0,75,0,0
+    KeyP,76,0,0
+sfx[0]:
+mixes[0]:
+sets[0]:
+export:
+  rate: 44100
+  bits: 16
+  normalize: true

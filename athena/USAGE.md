@@ -11,6 +11,7 @@ Athena is the room explorer in Daedalus. It generates, edits, solves and plays r
 - **Graph:**
   - Double-click empty space to add a room.
   - Drag from one room to another to add a passage. Click to select. Del deletes.
+  - Dragging a room snaps it in line with other rooms (pink guide), else to the dot grid; hold Alt to place it freely.
   - Wheel zooms, dragging the background pans, and the corner buttons fit or re-lay out the map.
   - Room markers: the entry has a green ring and exits a red one. A yellow dashed ring means `required`, a star means `important` and a bolt means the room has events.
   - Badges under a room count enemies (and their waves), items, chests and builders.

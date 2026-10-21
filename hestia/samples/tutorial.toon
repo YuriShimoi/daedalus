@@ -1,0 +1,40 @@
+dae: 1
+score:
+  mode: weighted
+player:
+  slots[2]{id,mode}:
+    hand,hold-drop
+    body,fixed
+  start[1]: torch
+effects[2]{id,str,invuln,dur}:
+  ward,,true,
+  rage,3,,2
+items[6]{id,slot,str,def,uses,heal,key,delFx,target}:
+  sword,hand,3,,10,,,,
+  shield,body,,2,,,,,
+  potion,,,,1,10,,,
+  holywater,,,,1,,,ward,one
+  redkey,,,,,,red,,
+  torch,,,,,,,,
+enemies[3]{id,hp,str,def,fx}:
+  rat,6,3,,
+  ogre,20,8,3,
+  ghost,8,4,,ward
+rooms[4]{id,flags,weight,mark,enemies,items,builders,x,y}:
+  r0,entry,,,,sword+holywater,,120,240
+  r1,,1,important,rat+rat,potion,anvil,240,240
+  r2,,2,,rat+ghost+ogre:2,shield,,240,360
+  r3,exit,,required,,,,360,120
+passages[4]{id,a,b,dir,lock}:
+  p0,r0,r1,,
+  p1,r1,r2,,
+  p2,r2,r0,a>b,
+  p3,r1,r3,,key:red
+recipes[1]{in,out,builder}:
+  shield+torch,redkey,anvil
+events[2]{id,room,on,if,do}:
+  ev0,r2,,,spawn:rat@r2:2+lock:p1
+  ev1,r2,leave,kill:ogre,unlock:p1+fx+:rage@player
+solutions[2]{id,steps}:
+  s0,take holywater;take sword;move r1;equip sword;fight;take potion;move r2;use holywater>r2.2;fight;fight;take shield;move r0;move r1;craft redkey/0;use potion;move r3
+  s1,take holywater;take sword;move r1;fight;take potion;equip sword;move r2;use holywater>r2.2;fight;fight;take shield;move r0;move r1;craft redkey/0;use potion;move r3

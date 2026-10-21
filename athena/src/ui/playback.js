@@ -100,7 +100,7 @@ class Playback {
     const $r = $s.querySelector('#pb-range');
     $r.max = n;
     $r.value = i;
-    $r.style.setProperty('--p', `${n ? i / n * 100 : 0}%`);
+    $r.style.setProperty('--p', n ? i / n : 0);   // 0..1, as shared/ui.js sets it
     $s.querySelector('#pb-progress').textContent = `${i}/${n}`;
     Playback.#playIcon();
     $s.querySelector('#pb-body').innerHTML = `${Playback.statsCard(Playback.states[i])}

@@ -476,8 +476,7 @@ DAE_CORE(DAE => {
       loop();
     };
     try {
-      const src = globalThis.DAE_CORE.workerSource(String(WORKER_MAIN));
-      worker = new Worker(URL.createObjectURL(new Blob([src], { type: 'text/javascript' })));
+      worker = globalThis.DAE_CORE.worker(WORKER_MAIN);
       worker.onmessage = e => e.data.type === 'done' ? done(e.data.result) : onProgress(e.data.progress);
       worker.onerror = e => {
         e.preventDefault?.();

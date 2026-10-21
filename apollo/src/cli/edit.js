@@ -4,38 +4,8 @@ const DAE = require('../core/index.js');
 const { Project, Instruments, Keymap, Sfxr, Theory } = DAE;
 
 //#region [ Values ]
-/** Splits an op into words; quotes keep spaces (name="My lead"). */
-function words(text) {
-  const out = [];
-  const rx = /(\S*?)"([^"]*)"|(\S+)/g;
-  let m;
-  while((m = rx.exec(text))) out.push(m[3] ?? m[1] + m[2]);
-  return out;
-}
-
-/** "a=1 b=x" words -> { a: 1, b: 'x' } plus the plain words left over. */
-function fields(list) {
-  const kv = {}, rest = [];
-  for(const w of list) {
-    const i = w.indexOf('=');
-    if(i > 0) kv[w.slice(0, i)] = value(w.slice(i + 1));
-    else rest.push(w);
-  }
-  return { kv, rest };
-}
-
-function value(v) {
-  if(v === 'true') return true;
-  if(v === 'false') return false;
-  if(v !== '' && !isNaN(Number(v))) return Number(v);
-  return v;
-}
-
-function number(v, what) {
-  const n = Number(v);
-  if(v === undefined || v === '' || isNaN(n)) throw new Error(`${what}: expected a number, got "${v ?? ''}"`);
-  return n;
-}
+require('../../../shared/cli.js');
+const { words, fields, value, number } = DAE.Cli;   // shared op-string helpers
 
 /** "3", "1-8" (1-based, inclusive) -> [from, to] 0-based. */
 function barRange(text, bars) {
@@ -440,7 +410,11 @@ const OPS = {
         p.export.bits = v;
       }
       else if(k === 'normalize') p.export.normalize = v === true;
-      else throw new Error('export rate= bits= normalize=');
+      else if(k === 'format') {
+        if(!['wav', 'opus'].includes(v)) throw new Error('export format wav|opus');
+        p.export.format = v;
+      }
+      else throw new Error('export rate= bits= normalize= format=');
     }
   },
 };

@@ -4,7 +4,7 @@ class Header {
     const $ = id => document.getElementById(id);
     for(const [id, icon] of [['btn-undo', 'rotate-left'], ['btn-redo', 'rotate-right'], ['btn-new', 'file-audio'], ['btn-open', 'folder-open'], ['btn-save', 'floppy-disk']])
       $(id).innerHTML = UI.icon(icon);
-    $('btn-wav').innerHTML = `${UI.icon('file-export')} WAV`;
+    $('btn-wav').innerHTML = `${UI.icon('file-export')} <span id="btn-wav-l">WAV</span>`;
     $('in-key').innerHTML = DAE.Theory.NAMES.map(n => `<option>${n}</option>`).join('');
     $('in-scale').innerHTML = Object.keys(DAE.Theory.SCALES).map(s => `<option value="${s}">${s[0].toUpperCase() + s.slice(1)}</option>`).join('');
 
@@ -23,7 +23,7 @@ class Header {
     $('btn-new').onclick = () => Files.newProject();
     $('btn-open').onclick = () => Files.open();
     $('btn-save').onclick = e => Files.save(e.shiftKey);
-    $('btn-wav').onclick = () => (App.mode === 'sfx' ? Files.exportSfx(App.sfxSel) : Files.exportSong());
+    $('btn-wav').onclick = e => Files.exportMenu(e);
   }
 
   static render() {
@@ -38,8 +38,8 @@ class Header {
     $('in-master').value = p.song.master;
     $('btn-undo').disabled = !App.history.canUndo;
     $('btn-redo').disabled = !App.history.canRedo;
-    $('btn-wav').title = p.mode === 'sfx' ? 'Export the current sound as WAV'
-      : p.song.loop.on ? 'Export the loop range as a seamless WAV loop' : 'Export the whole song as WAV';
+    $('btn-wav-l').textContent = Files.FORMATS[p.export.format].label;
+    $('btn-wav').title = (p.mode === 'sfx' ? 'Export the current sound' : p.song.loop.on ? 'Export the loop range as a seamless loop' : 'Export the whole song') + ' (WAV or Opus)';
     Header.playButton();
     App.setDirty(App.dirty);
   }

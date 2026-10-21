@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hestia · Daedalus</title>
+  <link rel="icon" type="image/svg+xml" href="assets/hestia.svg">
+  <link rel="icon" type="image/x-icon" href="assets/hestia.ico" sizes="any">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="top">
+    <a class="brand" href="../index.html" title="Daedalus toolbox"><img class="dae" src="../assets/daedalus.svg" alt="Daedalus"><span class="vr"></span></a>
+    <span class="brand"><img class="ic" src="assets/hestia.svg" alt="">Hestia</span>
+    <span class="sp"></span>
+    <div class="file"><b id="file-name">untitled.hestia.toon</b><span id="file-state"></span></div>
+    <div class="group" id="actions"></div>
+  </header>
+
+  <div id="ctx"></div>
+
+  <nav id="rail"></nav>
+
+  <main id="board" tabindex="0">
+    <div id="world">
+      <svg id="edges" width="1" height="1"></svg>
+      <div id="items"></div>
+      <div id="overlay"></div>
+    </div>
+    <div id="marquee"></div>
+    <div id="empty"></div>
+    <div id="search" class="off"><input id="search-in" placeholder="Search notes, text, labels" spellcheck="false"><span id="search-count"></span></div>
+    <div id="zoom"></div>
+  </main>
+
+
+  <script src="../shared/core.js"></script>
+  <script src="../shared/rng.js"></script>
+  <script src="../shared/toon.js"></script>
+  <script src="../shared/history.js"></script>
+  <script src="../shared/icons.js"></script>
+  <script src="../shared/handoff.js"></script>
+  <script src="../shared/ui.js"></script>
+  <script src="../shared/menu.js"></script>
+  <script src="../shared/files.js"></script>
+  <script src="../shared/store.js"></script>
+  <script src="../shared/viewport.js"></script>
+  <script src="../shared/snap.js"></script>
+  <script src="../shared/markdown.js"></script>
+  <script src="../shared/ogg.js"></script>
+  <script src="../shared/opus.js"></script>
+  <script src="src/core/board.js"></script>
+  <script src="src/core/draw.js"></script>
+  <script src="src/core/obsidian.js"></script>
+  <script src="src/ui/app.js"></script>
+  <script src="src/ui/render.js"></script>
+  <script src="src/ui/tools.js"></script>
+  <script src="src/ui/panels.js"></script>
+  <script src="src/ui/menu.js"></script>
+  <script src="src/ui/audio.js"></script>
+  <script src="src/ui/widgets.js"></script>
+  <script src="src/widgets/athena.js"></script>
+  <script src="src/widgets/apollo.js"></script>
+  <script src="src/ui/files.js"></script>
+  <script src="src/ui/export.js"></script>
+  <script src="src/ui/main.js"></script>
+</body>
+</html>

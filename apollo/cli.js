@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const DAE = require('./src/core/index.js');
+require('../shared/cli.js');
 const { Project, Engine, Sfxr, Wav, Samples, Instruments, Keymap, Toon, Theory } = DAE;
 const Edit = require('./src/cli/edit.js');
 
@@ -21,7 +22,7 @@ const HELP = `apollo <command> [options]
             sfx add <gen> [seed= name=] · sfx set <sound> <param>= wave= lock=a,b|all unlock= name=
             sfx generate|mutate <sound> [seed= gen= amount=] · sfx variants <sound> [n=6] · sfx paste <code> · sfx remove
             mix add <name> layers=zap@0:100,boom@120:80 · mix set|layer|remove ... · set add|set|remove <name> items=a,b
-            export rate= bits= normalize=
+            export rate= bits= normalize= format=wav|opus   (Opus is written by the page; the CLI renders WAV)
   presets                                engines, instrument presets and params, drum rows, keyboard templates
   params                                 sound effect params, waves and generators
   extract p.toon --inst <track> | --kit <track> | --keys  -o file.toon     save a preset / kit / keyboard template
@@ -38,20 +39,7 @@ const HELP = `apollo <command> [options]
   packs                                  bundled sample packs`;
 
 //#region [ Arguments ]
-function parse(argv) {
-  const args = { _: [] };
-  for(let i = 0; i < argv.length; i++) {
-    const a = argv[i];
-    if(a === '-o' || a === '-d') args[a.slice(1)] = argv[++i];
-    else if(a.startsWith('--')) {
-      const key = a.slice(2), next = argv[i + 1];
-      if(next === undefined || next.startsWith('-')) args[key] = true;
-      else args[key] = argv[++i];
-    }
-    else args._.push(a);
-  }
-  return args;
-}
+const { parse } = DAE.Cli;
 
 function load(file) {
   if(!file) throw new Error('missing project file');
@@ -291,21 +279,7 @@ const commands = {
 //#endregion
 
 function main(argv) {
-  const args = parse(argv);
-  const cmd = args._.shift();
-  if(!cmd || cmd === 'help' || args.help) {
-    console.log(HELP);
-    return cmd ? 0 : 1;
-  }
-  if(!commands[cmd]) {
-    console.error(`unknown command "${cmd}"\n\n${HELP}`);
-    return 1;
-  }
-  try { return commands[cmd](args); }
-  catch(err) {
-    console.error(`apollo ${cmd}: ${err.message}`);
-    return 1;
-  }
+  return DAE.Cli.run('apollo', HELP, commands, argv);
 }
 
 if(require.main === module) process.exitCode = main(process.argv.slice(2));
