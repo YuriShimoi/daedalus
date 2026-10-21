@@ -1,0 +1,57 @@
+/* Prisma */
+.pr { display: grid; grid-template-columns: var(--sw, 260px) 4px 1fr 0; height: 100%; min-height: 0; }
+.pr.has-detail { grid-template-columns: var(--sw, 260px) 4px 1fr 340px; }
+.pr-src { min-height: 0; }
+.pr-files { flex: 1; padding: 0 6px 6px; font-size: 12px; }
+.pr-none { padding: 10px 6px; display: grid; gap: 8px; justify-items: start; }
+.pr-file { display: flex; align-items: center; gap: 6px; padding: 3px 4px; border-radius: var(--r-sm); cursor: pointer; white-space: nowrap; }
+.pr-file:hover { background: #262626; }
+.pr-file span { overflow: hidden; text-overflow: ellipsis; flex: 1; direction: rtl; text-align: left; color: var(--text2); }
+.pr-file em { font-style: normal; color: var(--muted); font-size: 11px; }
+.pr-file.off span { color: var(--muted); text-decoration: line-through; }
+.pr-paste { height: 32%; min-height: 90px; padding: 0 6px 6px; display: grid; }
+.pr-paste textarea { background: var(--deep); font-size: 12px; padding: 8px; }
+.pr-ext { padding: 0 8px 8px; }
+.pr-ext input { font: 11px var(--mono); background: var(--deep); }
+.pr-main { display: grid; grid-template-rows: auto 1fr 26px; min-width: 0; min-height: 0; background: var(--base); }
+.pr-opts { background: var(--raised); overflow-x: auto; }
+.pr-opts input[type=range] { width: 110px; }
+.pr-merge-v { font-size: 11px; color: var(--text2); min-width: 40px; }
+.pr-opts input[data-o=q] { background: var(--base); padding: 4px 8px; }
+.pr-pal { padding: 14px 16px; display: block; }
+.pr-pal .empty { height: 100%; }
+.pr-gt { margin: 10px 0 8px; }
+.pr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 10px; }
+.pr-sw { cursor: pointer; border-radius: var(--r); padding: 4px; }
+.pr-sw:hover { background: var(--raised); }
+.pr-sw.sel { background: var(--raised); box-shadow: inset 0 0 0 2px var(--accent); }
+.pr-chip { width: 100%; height: 64px; border-radius: var(--r-sm); display: block; }
+.pr-chip i, .pr-big i { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); border-radius: inherit; }
+.pr-chip b { position: absolute; right: 6px; bottom: 4px; font: 600 11px var(--mono); }
+.pr-chip em { position: absolute; left: 6px; bottom: 4px; font: 11px var(--mono); font-style: normal; opacity: .8; }
+.pr-meta { display: grid; padding: 4px 2px 0; font-size: 12px; }
+.pr-meta .mono { color: var(--text); }
+.pr-nm { color: var(--muted); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-height: 15px; }
+.pr-detail { padding: 12px; display: block; gap: 8px; border-left: 0; }
+.pr-detail .section { margin: 14px 0 6px; }
+.pr-big { width: 100%; height: 90px; border-radius: var(--r); display: block; }
+.pr-big span { position: absolute; left: 10px; bottom: 8px; font-weight: 700; font-size: 15px; }
+.pr-fmts { display: grid; margin-top: 8px; }
+.pr-fmts button { display: grid; grid-template-columns: 52px 1fr auto; text-align: left; align-items: center; gap: 6px; padding: 4px 6px; font-size: 12px; }
+.pr-fmts .ic { opacity: .4; }
+.pr-fmts button:hover .ic { opacity: 1; }
+.pr-con { display: grid; grid-template-columns: 18px 1fr auto 62px; gap: 8px; align-items: center; font-size: 12px; padding: 2px 0; color: var(--text2); }
+.pr-con b { font-family: var(--mono); color: var(--text); }
+.pr-con em { font-style: normal; font-size: 11px; text-align: right; }
+.pr-con em.ok { color: var(--good); } .pr-con em.mid { color: var(--yellow); } .pr-con em.bad { color: var(--bad); }
+.pr-vars { display: flex; flex-wrap: wrap; gap: 4px; }
+.pr-vars .sw { width: 12px; height: 12px; }
+.pr-ref { padding: 6px 0; border-top: 1px solid #2A2A2A; font-size: 12px; display: grid; gap: 2px; }
+.pr-ref code { font: 11px var(--mono); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pr-ref b { color: var(--accent); font-weight: 600; }
+.pr-cat { font-size: 10px; text-transform: uppercase; letter-spacing: .05em; padding: 0 5px; border-radius: 3px; background: var(--line); color: var(--text2); }
+.pr-strip { display: flex; flex-wrap: wrap; gap: 0; border-radius: var(--r-sm); overflow: hidden; width: fit-content; max-width: 100%; }
+.pr-cell { width: 36px; height: 36px; border-radius: 0; cursor: pointer; }
+.pr-cell i { box-shadow: none; }
+.pr-cell:hover { outline: 2px solid var(--text); outline-offset: -2px; z-index: 1; }
+.pr-cell.sel { outline: 2px solid var(--accent); outline-offset: -2px; z-index: 2; }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ikaros · Daedalus</title>
+  <link rel="icon" type="image/svg+xml" href="assets/ikaros.svg">
+  <link rel="icon" type="image/x-icon" href="assets/ikaros.ico" sizes="any">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="top">
+    <a class="brand" href="../index.html" title="Daedalus toolbox"><img class="dae" src="../assets/daedalus.svg" alt="Daedalus"><span class="vr"></span></a>
+    <a class="brand" href="?" id="home-link"><img class="ic" src="assets/ikaros.svg" alt="">Ikaros</a>
+    <span class="crumb" id="crumb"></span>
+    <div class="group" id="tool-bar"></div>
+    <span class="sp"></span>
+    <div class="group" id="actions"></div>
+  </header>
+
+  <nav id="rail"></nav>
+
+  <main id="stage">
+    <section class="view on" id="home">
+      <div class="home-in">
+        <div class="section">Small tools</div>
+        <div class="grid" id="home-grid"></div>      </div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+  <div id="drop-hint"><div>Drop to open</div></div>
+
+  <script src="../shared/core.js"></script>
+  <script src="../shared/rng.js"></script>
+  <script src="../shared/toon.js"></script>
+  <script src="../shared/history.js"></script>
+  <script src="../shared/icons.js"></script>
+  <script src="../shared/handoff.js"></script>
+  <script src="../shared/ui.js"></script>
+  <script src="../shared/menu.js"></script>
+  <script src="../shared/files.js"></script>
+  <script src="../shared/store.js"></script>
+  <script src="../shared/viewport.js"></script>
+  <script src="src/ui/kit.js"></script>
+  <script src="src/ui/hub.js"></script>
+  <script src="src/ui/main.js"></script>
+</body>
+</html>

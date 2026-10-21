@@ -1,0 +1,66 @@
+/* Scale */
+.sc { display: grid; grid-template-columns: 1fr 340px; height: 100%; min-height: 0; }
+.sc-main { padding: 20px 28px; display: block; }
+.sc-top { display: grid; gap: 10px; max-width: 860px; }
+.sc-f { display: flex; gap: 8px; }
+.sc-in { flex: 1; font-size: 20px; padding: 10px 14px; background: var(--raised); }
+.sc-in.bad { box-shadow: inset 0 -2px var(--bad); }
+.sc-roll { font-size: 15px; padding: 0 18px; display: inline-flex; align-items: center; gap: 8px; }
+.sc-err { color: var(--bad); font-size: 12px; min-height: 16px; }
+.sc-dice { display: flex; flex-wrap: wrap; gap: 6px; }
+.sc-qd { padding: 4px; background: var(--raised); }
+.sc-qd:hover { background: var(--line); }
+.sc-die { position: relative; width: 44px; height: 44px; display: inline-grid; place-items: center; flex: none; }
+.sc-die svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: var(--line); }
+.sc-die b { position: relative; font: 700 13px var(--mono); color: var(--text); }
+.sc-qd .sc-die svg { fill: #2E2F3A; stroke: var(--accent); stroke-width: 1.5; }
+.sc-qd .sc-die b { font-size: 11px; color: var(--accent); }
+.sc-die.max svg { fill: rgba(80, 250, 123, .25); } .sc-die.max b { color: var(--good); }
+.sc-die.min svg { fill: rgba(255, 85, 85, .22); } .sc-die.min b { color: var(--bad); }
+.sc-die.drop { opacity: .35; } .sc-die.drop b { text-decoration: line-through; }
+.sc-die.boom svg { stroke: var(--yellow); stroke-width: 2; }
+.sc-was { font: 10px var(--mono); color: var(--muted); align-self: end; }
+.sc-set { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.sc-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.sc-chips .chip { padding: 1px 2px 1px 8px; font-family: var(--mono); }
+.sc-chips .chip button { padding: 0 3px; }
+.sc-add { width: 60px; padding: 3px 6px; background: var(--raised); }
+.sc-help { font-size: 12px; margin: 0; line-height: 1.6; }
+.sc-help code, .sc-sv code, .sc-h code { font: 11.5px var(--mono); color: var(--accent); }
+.sc-result { margin: 22px 0 6px; max-width: 860px; }
+.sc-result .empty { padding: 30px; }
+.sc-total { display: flex; align-items: baseline; gap: 16px; }
+.sc-total b { font: 700 64px/1 var(--mono); color: var(--accent); display: inline-block; }
+.sc-total span { color: var(--text2); font-size: 16px; }
+.sc-shown { color: var(--muted); margin: 6px 0 14px; font-size: 13px; word-break: break-all; }
+.sc-groups { display: grid; gap: 10px; }
+.sc-g { display: grid; grid-template-columns: 90px 1fr auto; gap: 10px; align-items: center; background: var(--raised); border-radius: var(--r); padding: 8px 12px; }
+.sc-gd { display: flex; flex-wrap: wrap; gap: 4px; }
+.sc-g em { font: 600 15px var(--mono); font-style: normal; color: var(--text); }
+.sc-odds { max-width: 860px; margin-top: 18px; }
+.sc-stats { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--text2); margin-bottom: 8px; }
+.sc-stats b { color: var(--text); font-family: var(--mono); }
+.sc-x { width: 70px; padding: 2px 6px; background: var(--raised); }
+.sc-chart { width: 100%; height: 150px; display: block; }
+.sc-chart .t { font: 11px var(--mono); fill: var(--muted); }
+.sc-side { min-height: 0; display: grid; grid-template-rows: auto auto auto 1fr; }
+.sc-side .bar input { width: 90px; padding: 3px 6px; background: var(--base); }
+.sc-saved { padding: 0 8px 6px; display: grid; gap: 2px; }
+.sc-sv { display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: var(--r-sm); cursor: pointer; background: var(--base); }
+.sc-sv:hover { background: #262626; }
+.sc-sv span { flex: 1; }
+.sc-sv button { padding: 0 4px; opacity: 0; }
+.sc-sv:hover button { opacity: 1; }
+.sc-hist { padding: 0 8px 10px; }
+.sc-h { display: grid; grid-template-columns: 52px 1fr auto; gap: 8px; align-items: center; padding: 5px 6px; border-radius: var(--r-sm); position: relative; cursor: pointer; }
+.sc-h:hover { background: #262626; }
+.sc-h.pin { box-shadow: inset 2px 0 var(--accent); }
+.sc-h > b { font: 700 18px var(--mono); text-align: right; }
+.sc-h div { display: grid; min-width: 0; }
+.sc-h div span { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sc-h em { font-style: normal; font-size: 11px; color: var(--muted); }
+.sc-ha { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); display: none; background: #262626; border-radius: var(--r-sm); }
+.sc-h:hover .sc-ha { display: flex; }
+.sc-ha button { padding: 2px 5px; }
+.sc-h.pin .sc-ha button:first-child { color: var(--accent); }
+.sc-note { padding: 4px 8px; font-size: 12px; margin: 0; }

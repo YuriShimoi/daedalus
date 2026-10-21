@@ -1,0 +1,55 @@
+/* Metronome */
+.mt { display: grid; grid-template-columns: 230px 1fr 380px; height: 100%; min-height: 0; }
+.mt-list { display: block; padding: 6px 8px 14px; }
+.mt-g { padding: 12px 6px 4px; }
+.mt-it { display: flex; align-items: center; gap: 8px; padding: 3px 8px; border-radius: var(--r-sm); cursor: pointer; color: var(--text2); font-size: 12.5px; }
+.mt-it:hover { background: #262626; color: var(--text); }
+.mt-it.on { background: var(--line); color: var(--accent); }
+.mt-mini { width: 26px; height: 26px; flex: none; color: var(--muted); }
+.mt-it.on .mt-mini { color: var(--accent); }
+.mt-ai { width: 26px; display: grid; place-items: center; color: var(--muted); font-size: 10px; }
+.mt-main { padding: 18px 24px; display: block; background: var(--base); }
+.mt-ed { display: grid; grid-template-columns: minmax(260px, 360px) 1fr; gap: 24px; align-items: start; }
+.mt-graph { width: 100%; height: auto; overflow: visible; touch-action: none; user-select: none; }
+.mt-box { fill: var(--raised); }
+.mt-gl { stroke: #2C2C2C; }
+.mt-diag { stroke: var(--line); stroke-dasharray: 4 4; }
+.mt-curve { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.mt-arm { stroke: var(--muted); stroke-width: 1.5; }
+.mt-h { fill: var(--base); stroke: var(--text); stroke-width: 2.5; cursor: grab; }
+.mt-h:hover { fill: var(--accent); }
+.mt-dot { fill: var(--yellow); }
+.mt-t { font: 11px var(--mono); fill: var(--muted); }
+.mt-side { display: grid; gap: 12px; }
+.mt-css { background: var(--raised); }
+.mt-css.bad { box-shadow: inset 0 -2px var(--bad); }
+.mt-row { display: flex; gap: 12px; align-items: end; flex-wrap: wrap; }
+.mt-row > .field { flex: 1; min-width: 120px; }
+.mt-row select, .mt-row input[type=color] { background: var(--raised); }
+.field b { color: var(--accent); font-family: var(--mono); font-weight: 600; }
+.mt-chk { display: inline-flex; align-items: center; gap: 6px; color: var(--text2); font-size: 12px; white-space: nowrap; }
+.mt-note { font-size: 12px; margin: 0; line-height: 1.5; }
+.mt-note code { font: 11px var(--mono); color: var(--accent); }
+.mt-prev { display: grid; gap: 8px; margin: 22px 0 6px; }
+.mt-lane { display: grid; grid-template-columns: 90px 1fr auto; gap: 12px; align-items: center; }
+.mt-lane .lbl { overflow: hidden; text-overflow: ellipsis; }
+.mt-track { position: relative; height: 30px; background: var(--raised); border-radius: var(--r); overflow: visible; }
+.mt-track.mt-c { display: grid; place-items: center; width: 60px; height: 44px; }
+.mt-ball { position: absolute; top: 4px; left: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); display: block; }
+.mt-c .mt-ball, .mt-c .mt-sq { position: static; }
+.mt-sq { width: 26px; height: 26px; background: var(--accent); border-radius: 3px; display: block; }
+.mt-bar { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: var(--r); opacity: .8; display: block; }
+.mt-ball.r1 { background: var(--purple); } .mt-ball.r2 { background: var(--good); } .mt-ball.r3 { background: var(--pink); } .mt-ball.r0 { background: var(--yellow); }
+.mt-race { display: grid; gap: 8px; }
+.mt-race button { padding: 2px 6px; }
+.mt-main > .section { margin-top: 18px; }
+.mt-stage { height: 260px; border-radius: var(--r-lg); background: var(--raised); display: grid; place-items: center; overflow: hidden; perspective: 600px; }
+.mt-actor { line-height: 0; }
+.mt-actor .ic { width: 1em; height: 1em; }
+.mt-ctrl { display: grid; gap: 10px; margin-top: 14px; }
+.mt-vars { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px 14px; }
+.mt-icons { display: flex; flex-wrap: wrap; gap: 3px; }
+.mt-icons button { width: 34px; height: 34px; padding: 0; display: grid; place-items: center; font-size: 15px; }
+.mt-icons button.on { background: var(--line); color: var(--accent); }
+.mt-out { display: block; padding-bottom: 10px; }
+.mt-o pre { margin: 0 10px 8px; padding: 10px 12px; background: var(--deep); border-radius: var(--r); font-size: 11.5px; line-height: 1.5; white-space: pre-wrap; word-break: break-all; color: var(--text2); max-height: 360px; overflow: auto; }

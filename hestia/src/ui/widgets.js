@@ -70,11 +70,21 @@ class Widgets {
     return Board.widgetKind(name, mime, text);
   }
 
+  /** Opens a file in an Ikaros subtool in a new tab (localStorage handoff). */
+  static toIkaros(tool, name, text) {
+    try {
+      const id = DAE.Handoff.give(name, text);
+      window.open(`../ikaros/index.html?tool=${tool}&open=${id}`, '_blank');
+    }
+    catch { alert('Too big to hand over to Ikaros (browser storage is full).'); }
+  }
+
   /** Right-click rows for a widget item. */
   static menu(it) {
     const text = Widgets.sourceText(it), name = it.tool === 'athena' ? 'Athena' : 'Apollo';
     const rows = [
       [`Open in ${name} (new tab)`, 'up-right-from-square', () => DAE.Handoff.open(`../${it.tool}/index.html`, it.name, text), '', !text],
+      ['Open in Ikaros › Spyglass (new tab)', 'ik-spyglass', () => Widgets.toIkaros('spyglass', it.name, text), '', !text],
       ['Replace file…', 'folder-open', () => Files.pick('replace', null, it)],
       ['Save file', 'download', () => Files.saveAsset(it.asset)],
     ];

@@ -1,0 +1,53 @@
+/* Wheel */
+.wh { display: grid; grid-template-columns: 430px 1fr 300px; height: 100%; min-height: 0; }
+.wh-items { min-height: 0; display: grid; grid-template-rows: auto 1fr auto auto; }
+.wh-list { padding: 0 8px; display: grid; gap: 3px; align-content: start; }
+.wh-it { display: grid; grid-template-columns: auto auto minmax(0, 1fr) 78px 58px auto auto; gap: 4px; align-items: center; padding: 3px 4px; border-radius: var(--r-sm); background: var(--base); }
+.wh-it.off { opacity: .45; }
+.wh-it input, .wh-it select { padding: 3px 6px; font-size: 12px; background: transparent; }
+.wh-it input:focus, .wh-it select:focus { background: var(--deep); }
+.wh-it select { color: var(--text2); }
+.wh-it button { padding: 2px 5px; }
+.wh-pct { text-align: right; }
+.wh-sw { position: relative; width: 20px; height: 20px; border-radius: var(--r-xs); overflow: hidden; cursor: pointer; }
+.wh-sw input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.wh-sw i { position: absolute; inset: 0; pointer-events: none; }
+.wh-text { margin: 0 8px; min-height: 200px; background: var(--deep); padding: 8px 10px; font-size: 12.5px; }
+.wh-opts { padding: 10px 12px 12px; display: grid; gap: 8px; border-top: 1px solid #2A2A2A; }
+.wh-row { display: flex; align-items: center; gap: 8px; }
+.wh-row .lbl { width: 56px; }
+.wh-row select { background: var(--base); padding: 3px 6px; }
+.wh-row input[type=range] { flex: 1; }
+.wh-secs { color: var(--accent); font-size: 12px; min-width: 32px; }
+.wh-chk { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); cursor: pointer; }
+.wh-main { position: relative; display: grid; place-items: center; background: var(--base); min-width: 0; min-height: 0; overflow: hidden; }
+.wh-wrap { width: min(92%, 80vh); aspect-ratio: 1; }
+.wh-svg { width: 100%; height: 100%; overflow: visible; user-select: none; touch-action: none; cursor: grab; }
+.wh-svg text { font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 600; pointer-events: none; }
+.wh-sl.win path { filter: brightness(1.15); }
+.wh-hub { cursor: pointer; }
+.wh-hub circle { fill: #1A1A1A; stroke: #F8F8F2; stroke-width: 4; }
+.wh-hub text { fill: #F8F8F2; font-size: 16px; letter-spacing: .08em; }
+.wh-hub:hover circle { fill: #2A2A2A; }
+.wh-win { position: absolute; left: 0; right: 0; bottom: 20px; display: grid; place-items: center; pointer-events: none; }
+.wh-banner { display: flex; align-items: center; gap: 10px; padding: 10px 20px; border-radius: var(--r-lg); background: var(--raised); box-shadow: inset 4px 0 var(--c); font-size: 18px; animation: wh-pop .4s cubic-bezier(.34, 1.56, .64, 1); }
+.wh-banner .ic { color: var(--c); }
+.wh-banner span { color: var(--muted); font-size: 12px; }
+@keyframes wh-pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.wh-side { min-height: 0; display: grid; grid-template-rows: auto 1fr auto auto; }
+.wh-spread { padding: 0 12px 10px; display: block; }
+.wh-sp { display: grid; grid-template-columns: 12px 1fr auto 96px; gap: 6px; align-items: center; font-size: 12px; padding: 3px 0; }
+.wh-sp > i { width: 12px; height: 12px; border-radius: 2px; }
+.wh-sp > b { font-family: var(--mono); }
+.wh-sp em { font-style: normal; text-align: right; font-family: var(--mono); font-size: 11px; }
+.wh-bar { grid-column: 2 / 5; position: relative; height: 4px; background: var(--base); border-radius: 2px; }
+.wh-bar b { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 2px; }
+.wh-bar s { position: absolute; top: -3px; width: 2px; height: 10px; background: var(--text); }
+.wh-last { display: flex; flex-wrap: wrap; gap: 3px; }
+.wh-saved { padding: 0 8px 10px; max-height: 30vh; display: grid; gap: 3px; align-content: start; }
+.wh-sv { display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: var(--r-sm); background: var(--base); cursor: pointer; }
+.wh-sv:hover { background: #262626; }
+.wh-sv span { flex: 1; }
+.wh-sv em { font-style: normal; color: var(--muted); font-size: 11px; }
+.wh-sv button { padding: 0 4px; }
+.wh-note { padding: 4px 0; font-size: 12px; margin: 0; }

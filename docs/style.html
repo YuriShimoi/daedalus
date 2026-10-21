@@ -197,6 +197,7 @@
     <h2 id="tools">Tool identity</h2>
     <p>Each tool has one accent, equal to its icon's base color. Set it as <code>--accent</code> in the tool's <code>:root</code>.</p>
     <div class="demo tiles">
+      <div><span><img src="../ikaros/assets/ikaros.svg" alt=""></span>Ikaros<code>#CD7F32</code></div>
       <div><span><img src="../hestia/assets/hestia.svg" alt=""></span>Hestia<code>#8BE9FD</code></div>
       <div><span><img src="../athena/assets/athena.svg" alt=""></span>Athena<code>#F4B740</code></div>
       <div><span><img src="../hermes/assets/hermes.svg" alt=""></span>Hermes<code>#50FA7B</code></div>
@@ -205,6 +206,7 @@
     </div>
     <ul class="rules">
       <li><b>Name</b>: a Greek god or myth that fits the tool's job.</li>
+      <li><b>Subtools</b> (Ikaros): plain job names (Spyglass, Caliper, Prisma…), a Font Awesome glyph in the rail, or a custom glyph in the same solid style (<code>shared/icons/ik-*.svg</code>) when Font Awesome has no match.</li>
       <li><b>Icon</b>: one simple back form (ring, hexagon...) with the tool's initial drawn on top, breaking through it with a gap cut around the letter. Flat, 1-2 colors, no outline. Athena's is the target style.</li>
       <li><b>Files</b>: <code>&lt;tool&gt;/assets/&lt;tool&gt;.svg</code> (tight viewBox) and <code>.ico</code>; used as favicon, header brand icon and landing tile.</li>
       <li><b>UI icons</b>: Font Awesome Free from the shared sprite (<code>shared/icons/</code> → <code>shared/icons.js</code>).</li>
@@ -216,7 +218,7 @@
       <li>Load order: <code>shared/base.css</code>, then the tool's <code>style.css</code>. The tool CSS adds its accent and layout and never redefines base tokens.</li>
       <li>Plain UMD scripts (<code>window.DAE</code> in the page, <code>module.exports</code> in Node), so the CLI and tests share the core.</li>
       <li>Files are TOON (JSON accepted on load).</li>
-      <li>Reuse <code>shared/</code> before writing a helper: <code>files.js</code> (open / save / pick / folder export), <code>store.js</code> (IndexedDB autosave, recent lists), <code>ui.js</code> (slider fill), <code>menu.js</code> (right-click menu), <code>viewport.js</code> (pan / zoom), <code>snap.js</code> (snapping + guides, Alt for free), <code>cli.js</code> (CLI args and edit-op strings), <code>handoff.js</code> (open a file in another tool), <code>markdown.js</code>, <code>ogg.js</code> + <code>opus.js</code> (Opus files), <code>history.js</code>, <code>toon.js</code>, <code>rng.js</code>, <code>icons.js</code>, and <code>DAE_CORE.worker(main)</code> in <code>core.js</code> for file:// safe workers.</li>
+      <li>Reuse <code>shared/</code> before writing a helper: <code>files.js</code> (open / save / pick / folder export), <code>store.js</code> (IndexedDB autosave, recent lists), <code>ui.js</code> (slider fill), <code>menu.js</code> (right-click menu), <code>viewport.js</code> (pan / zoom), <code>snap.js</code> (snapping + guides, Alt for free), <code>cli.js</code> (CLI args and edit-op strings), <code>handoff.js</code> (open a file in another tool), <code>markdown.js</code>, <code>ogg.js</code> + <code>opus.js</code> (Opus files), <code>zip.js</code> (stored zip files), <code>gif.js</code> (animated GIF encoder), <code>history.js</code>, <code>toon.js</code>, <code>rng.js</code>, <code>icons.js</code>, and <code>DAE_CORE.worker(main)</code> in <code>core.js</code> for file:// safe workers.</li>
     </ul>
   </main>
 </body>

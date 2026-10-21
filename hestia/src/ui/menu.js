@@ -12,7 +12,12 @@ class Menu {
       if(['text', 'note'].includes(it.kind) || (it.kind === 'shape' && !Board.isLine(it))) rows.push(['Edit text', 'font', () => Tools.edit(it), 'Dbl-click']);
       if(it.kind === 'group') rows.push(['Rename group', 'font', () => Tools.editGroup(it)], ['Ungroup', 'object-group', () => Panels.act('ungroup')]);
       if(App.selected.some(x => x.kind !== 'group')) rows.push([App.sel.size > 1 ? 'Group selection' : 'Make a group', 'object-group', () => Panels.act('group'), 'Ctrl+G']);
-      if(it.kind === 'image') rows.push(['Save image', 'download', () => Files.saveAsset(it.asset)]);
+      if(it.kind === 'image') {
+        const asset = Board.asset(App.b, it.asset);
+        rows.push(['Save image', 'download', () => Files.saveAsset(it.asset)],
+          ['Open in Ikaros › Easel (new tab)', 'ik-easel', () => Widgets.toIkaros('easel', asset.name ?? 'image.png', `data:${asset.mime};base64,${asset.data}`), '', !asset]);
+      }
+      if(it.kind === 'note') rows.push(['Find colors (Ikaros › Prisma)', 'ik-prism', () => Widgets.toIkaros('prisma', 'note.md', it.md ?? '')]);
       rows.push(['Copy', 'copy', () => App.copy(), 'Ctrl+C'], ['Duplicate', 'clone', () => App.duplicate(), 'Ctrl+D'], null,
         ['Bring to front', 'layer-group', () => Panels.act('front'), 'Ctrl+]'], ['Send to back', 'layer-group', () => Panels.act('back'), 'Ctrl+['],
         it.locked ? ['Unlock', 'lock-open', () => Panels.act('unlock')] : ['Lock', 'lock', () => Panels.act('lock')], null,

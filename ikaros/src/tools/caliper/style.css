@@ -1,0 +1,49 @@
+/* Caliper */
+.cl { display: grid; grid-template-rows: var(--th, 42%) 4px 1fr; height: 100%; min-height: 0; }
+.cl-texts { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; min-height: 0; background: var(--deep); }
+.cl-side { min-height: 0; }
+.cl-side .cl-code { flex: 1; min-height: 0; display: grid; }
+.cl-side .code { height: 100%; }
+.cl-tag { width: 20px; height: 20px; border-radius: var(--r-sm); display: grid; place-items: center; font-size: 11px; color: var(--base); }
+.cl-a { background: var(--bad); }
+.cl-b { background: var(--good); }
+.cl-name { overflow: hidden; text-overflow: ellipsis; text-transform: none; letter-spacing: 0; font-size: 12px; color: var(--text2); }
+.cl-err { padding: 4px 10px; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cl-err.ok { color: var(--good); }
+.cl-err.bad { color: var(--bad); }
+.cl-hsplit { background: var(--deep); cursor: row-resize; }
+.cl-hsplit:hover, .cl-hsplit.drag { background: var(--line); }
+.cl-res { display: grid; grid-template-rows: auto 1fr; min-height: 0; background: var(--base); }
+.cl-opts { background: var(--raised); overflow-x: auto; }
+.cl-opts select, .cl-opts input { padding: 3px 6px; background: var(--base); }
+.cl-chk { display: inline-flex; align-items: center; gap: 4px; color: var(--text2); font-size: 12px; white-space: nowrap; cursor: pointer; }
+.cl-sum { display: inline-flex; gap: 10px; font: 600 13px var(--mono); margin-right: 4px; white-space: nowrap; }
+.cl-s-added { color: var(--good); } .cl-s-removed { color: var(--bad); } .cl-s-changed { color: var(--yellow); } .cl-s-moved { color: var(--purple); }
+.cl-same { color: var(--good); font-family: var(--font); }
+.cl-body { display: grid; grid-template-columns: 1fr 300px; min-height: 0; }
+.cl-tree { padding: 6px 0; font: 12.5px/22px var(--mono); }
+.cl-list { background: var(--raised); font-size: 12px; }
+.cl-row { display: flex; align-items: center; gap: 6px; padding: 0 10px 0 calc(10px + var(--d) * 18px); white-space: nowrap; cursor: pointer; border-left: 2px solid transparent; }
+.cl-row:hover { background: #222; }
+.cl-row.sel { background: rgba(205, 127, 50, .14); border-left-color: var(--accent); }
+.cl-fold { width: 12px; color: var(--muted); flex: none; text-align: center; }
+.cl-badge { width: 16px; height: 16px; border-radius: 3px; display: grid; place-items: center; font-size: 11px; flex: none; }
+.cl-key { color: #8BE9FD; }
+.cl-val { display: inline-flex; gap: 6px; overflow: hidden; text-overflow: ellipsis; margin-left: 4px; }
+.cl-old { text-decoration: line-through; opacity: .7; }
+.cl-arrow { color: var(--muted); }
+.cl-row .chip { font-size: 10.5px; padding: 0 6px; }
+.s-added .cl-badge { background: rgba(80, 250, 123, .18); color: var(--good); }
+.s-removed .cl-badge { background: rgba(255, 85, 85, .18); color: var(--bad); }
+.s-changed .cl-badge { background: rgba(241, 250, 140, .16); color: var(--yellow); }
+.s-moved .cl-badge { background: rgba(189, 147, 249, .18); color: var(--purple); }
+.s-inner .cl-badge { color: var(--muted); }
+.cl-row.s-added .cl-key { color: var(--good); }
+.cl-row.s-removed .cl-key { color: var(--bad); text-decoration: line-through; }
+.cl-row.s-same { opacity: .62; }
+.cl-item { display: flex; align-items: center; gap: 8px; padding: 3px 10px; cursor: pointer; white-space: nowrap; overflow: hidden; }
+.cl-item:hover { background: #262626; }
+.cl-item.sel { background: rgba(205, 127, 50, .14); }
+.cl-item .mono { overflow: hidden; text-overflow: ellipsis; }
+.cl .ic.up { transform: rotate(180deg); }
+.cl .empty { height: 100%; }

@@ -3,6 +3,7 @@
 // In tables an empty cell means "missing".
 DAE_CORE(DAE => {
   const NUM = /^-?\d+(\.\d+)?(e[+-]?\d+)?$/i;
+  const PLAIN_KEY = /^[\w$.-]+$/;
   const HEAD = /^([\w$.-]+|"(?:[^"\\]|\\.)*")?(?:\[(\d+)\])?(?:\{([^}]*)\})?:(?: (.*))?$/;
 
   class Toon {
@@ -28,6 +29,11 @@ DAE_CORE(DAE => {
       return s;
     }
 
+    /** A key as written: plain keys bare, anything else quoted. */
+    static key(k) {
+      return PLAIN_KEY.test(k) ? k : '"' + String(k).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t') + '"';
+    }
+
     static #isPrim(v) { return v === null || ['string', 'number', 'boolean', 'undefined'].includes(typeof v); }
     static #isObj(v) { return v && typeof v === 'object' && !Array.isArray(v); }
 
@@ -38,7 +44,7 @@ DAE_CORE(DAE => {
       const keys = [], used = new Set();
       for(const o of list) {
         for(const [k, v] of Object.entries(o)) {
-          if(!Toon.#isPrim(v)) return null;
+          if(!Toon.#isPrim(v) || !PLAIN_KEY.test(k)) return null;
           if(!keys.includes(k)) keys.push(k);
           if(v !== undefined) used.add(k);
         }
@@ -51,10 +57,10 @@ DAE_CORE(DAE => {
       const pad = '  '.repeat(indent);
       for(const [key, v] of Object.entries(value)) {
         if(v === undefined) continue;
-        if(Toon.#isPrim(v)) out.push(`${pad}${key}: ${Toon.str(v)}`);
-        else if(Array.isArray(v)) Toon.#array(`${pad}${key}`, v, indent, out);
+        if(Toon.#isPrim(v)) out.push(`${pad}${Toon.key(key)}: ${Toon.str(v)}`);
+        else if(Array.isArray(v)) Toon.#array(`${pad}${Toon.key(key)}`, v, indent, out);
         else {
-          out.push(`${pad}${key}:`);
+          out.push(`${pad}${Toon.key(key)}:`);
           Toon.#object(v, indent + 1, out);
         }
       }
