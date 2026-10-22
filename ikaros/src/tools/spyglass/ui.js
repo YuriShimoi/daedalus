@@ -168,12 +168,7 @@ passages[2]{from,to,lock}:
       s += `<rect width="${p.w}" height="${p.h}" rx="5" fill="${COL.card}"${sel && st.sel.row < 0 ? ` stroke="${COL.accent}" stroke-width="2"` : keyHit ? ` stroke="${COL.hit}" stroke-width="${keyHit === 'cur' ? 2 : 1}"` : ''}/>`;
       s += `<path d="M0 5a5 5 0 0 1 5-5h${p.w - 10}a5 5 0 0 1 5 5v${S.HEADER - 5}h-${p.w}z" fill="${COL.head}" data-head="1"/>`;
       s += `<text x="10" y="18" class="t-key" fill="${COL.text}" font-weight="700">${Kit.esc(trunc(String(title), Math.floor((p.w - 30 - kindLbl.length * 6 - (card.children.length ? 18 : 0)) / S.CH)))}</text>`;
-      s += `<text x="${p.w - (card.children.length ? 28 : 10)}" y="18" text-anchor="end" class="t-ui" fill="${COL.muted}">${kindLbl}</text>`;
-      if(card.children.length) {
-        const hid = st.hidden.has(id);
-        s += `<g data-fold="${id}" class="fold" transform="translate(${p.w - 20} 6)"><rect width="16" height="16" rx="3" fill="${hid ? COL.line : 'transparent'}"/><path d="${hid ? 'M6 4l5 4-5 4' : 'M4 6l4 5 4-5'}" fill="none" stroke="${COL.muted}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>`;
-        if(hid) s += `<g transform="translate(${p.w + 6} ${S.HEADER / 2 - 9})" data-fold="${id}" class="fold"><rect width="${22 + String(Tree.descendants(st.cards, id)).length * 7}" height="18" rx="9" fill="${COL.line}"/><text x="${11 + String(Tree.descendants(st.cards, id)).length * 3.5}" y="13" text-anchor="middle" class="t-ui" fill="#A3A3A3">+${Tree.descendants(st.cards, id)}</text></g>`;
-      }
+      s += `<text x="${p.w - 10}" y="18" text-anchor="end" class="t-ui" fill="${COL.muted}">${kindLbl}</text>`;
       if(card.kind === 'table') {
         const size = Tree.size(card);
         let x = 10;
